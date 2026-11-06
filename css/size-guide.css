@@ -1,0 +1,38 @@
+.size-guide-nav { border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+.size-guide-nav-link { font-size: 10px; text-transform: uppercase; letter-spacing: var(--tracking-tag); color: var(--tag-200); }
+.size-guide-nav-link:hover { color: var(--tag-white); }
+.size-guide-hero { padding: 8.5rem 0 3.25rem; background: var(--tag-900); border-bottom: 1px solid rgba(255,255,255,0.1); }
+.size-guide-breadcrumb { display: flex; gap: .6rem; margin-bottom: 2.5rem; font: 10px var(--font-sans); text-transform: uppercase; letter-spacing: var(--tracking-tag); color: var(--tag-300); }
+.size-guide-breadcrumb a:hover { color: var(--tag-white); }
+.size-guide-title { margin: .45rem 0 .7rem; font-family: var(--font-display); font-size: clamp(4rem, 10vw, 8rem); line-height: .85; letter-spacing: -.02em; color: var(--tag-white); }
+.size-guide-intro { max-width: 38rem; color: var(--tag-200); font-size: 1rem; font-weight: 300; line-height: 1.75; }
+.size-guide-content { padding: 4rem 0 6rem; }
+.size-guide-note { display: flex; align-items: flex-start; gap: .9rem; margin-bottom: 4.5rem; padding: 1rem 1.25rem; border-left: 2px solid var(--tag-white); background: var(--tag-900); color: var(--tag-200); font-size: .875rem; line-height: 1.65; }
+.size-guide-note svg { width: 1.1rem; min-width: 1.1rem; color: var(--tag-white); margin-top: .15rem; }
+.size-guide-layout { display: grid; grid-template-columns: minmax(14rem, .7fr) minmax(0, 2fr); gap: clamp(2.5rem, 7vw, 7rem); }
+.size-guide-measurements h2, .size-guide-table-heading h2, .size-guide-fit-callout h2 { margin-top: .8rem; font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 400; line-height: .95; color: var(--tag-white); }
+.size-guide-measurements ol { margin-top: 2.25rem; counter-reset: measures; }
+.size-guide-measurements li { position: relative; display: grid; gap: .4rem; padding: 0 0 1.4rem 2rem; margin-bottom: 1.4rem; border-bottom: 1px solid var(--tag-700); counter-increment: measures; }
+.size-guide-measurements li::before { content: "0" counter(measures); position: absolute; left: 0; color: var(--tag-300); font: 10px var(--font-mono); }
+.size-guide-measurements strong { font-size: .75rem; text-transform: uppercase; letter-spacing: var(--tracking-tag); color: var(--tag-100); }
+.size-guide-measurements span { color: var(--tag-300); font-size: .875rem; line-height: 1.5; }
+.size-guide-table-block + .size-guide-table-block { margin-top: 4.5rem; }
+.size-guide-table-heading { display: grid; grid-template-columns: auto 1fr; column-gap: 1rem; align-items: baseline; margin-bottom: 1.5rem; }
+.size-guide-table-heading span { color: var(--tag-300); font: 10px var(--font-mono); }
+.size-guide-table-heading h2 { margin: 0; font-size: clamp(1.9rem, 3.2vw, 2.8rem); }
+.size-guide-table-heading p { grid-column: 2; margin-top: .55rem; color: var(--tag-300); font-size: .8rem; }
+.size-guide-table-wrap { overflow-x: auto; border: 1px solid var(--tag-700); }
+.size-guide-table-wrap table { width: 100%; min-width: 35rem; border-collapse: collapse; }
+.size-guide-table-wrap th, .size-guide-table-wrap td { padding: 1rem 1.25rem; border-bottom: 1px solid var(--tag-700); text-align: left; font-size: .8rem; }
+.size-guide-table-wrap thead { background: var(--tag-900); }
+.size-guide-table-wrap thead th { color: var(--tag-300); font-size: .65rem; font-weight: 500; letter-spacing: var(--tracking-tag); text-transform: uppercase; }
+.size-guide-table-wrap tbody th { color: var(--tag-white); font-weight: 500; }
+.size-guide-table-wrap td { color: var(--tag-200); font-family: var(--font-mono); font-size: .75rem; }
+.size-guide-table-wrap tbody tr:last-child > * { border-bottom: 0; }
+.size-guide-fit-callout { display: flex; align-items: end; justify-content: space-between; gap: 2rem; margin-top: 6rem; padding: clamp(2rem, 5vw, 4rem); background: var(--tag-900); border: 1px solid var(--tag-700); }
+.size-guide-fit-callout h2 { font-size: clamp(2.25rem, 4vw, 3.75rem); }
+.size-guide-fit-callout p { max-width: 34rem; margin-top: 1rem; color: var(--tag-200); font-size: .9rem; line-height: 1.6; }
+.size-guide-fit-callout .btn-outline { flex-shrink: 0; border-color: var(--tag-400); }
+.size-guide-footer { margin-top: 0; }
+.size-guide-footer .footer-bottom { padding-top: 1.5rem; }
+@media (max-width: 767px) { .size-guide-nav .navbar-links { display: none; } .size-guide-hero { padding: 7rem 0 2.5rem; } .size-guide-breadcrumb { margin-bottom: 2rem; } .size-guide-layout { grid-template-columns: 1fr; } .size-guide-measurements { padding-bottom: 1rem; } .size-guide-fit-callout { align-items: flex-start; flex-direction: column; margin-top: 4rem; } .size-guide-footer .footer-bottom { flex-direction: column; align-items: flex-start; gap: 1rem; } }

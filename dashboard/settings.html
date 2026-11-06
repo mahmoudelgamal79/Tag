@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings — TAG Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=block"
+    rel="stylesheet" />
+  <!-- Shared TAG brand design system: colors, fonts, loader, cursor, buttons -->
+  <link rel="stylesheet" href="../css/style.css?v=7" />
+  <!-- Admin dashboard layout & components -->
+  <link rel="stylesheet" href="css/dashboard.css?v=5" />
+  <!-- Settings page — extends the dashboard system, adds no new colors/fonts -->
+  <link rel="stylesheet" href="css/settings.css?v=5" />
+  <link rel="stylesheet" href="css/product-form.css?v=5" />
+</head>
+
+<body class="admin-body">
+
+  <!-- ============================================
+       LOADER (reused from storefront)
+       ============================================ -->
+  <div class="loader" id="loader">
+    <div class="loader-mark">
+      <img src="../assets/images/logo-white.png" alt="TAG Logo">
+    </div>
+    <div class="loader-line"><span></span></div>
+  </div>
+
+  <!-- ============================================
+       CUSTOM CURSOR (reused from storefront)
+       ============================================ -->
+  <div class="cursor-ring" id="cursorRing">
+    <div class="cursor-ring-inner"></div>
+  </div>
+  <div class="cursor-dot" id="cursorDot">
+    <div class="cursor-dot-inner"></div>
+  </div>
+
+  <!-- ============================================
+       SIDEBAR (reused from Dashboard — Settings active)
+       ============================================ -->
+  <div class="admin-sidebar-overlay" id="adminSidebarOverlay"></div>
+
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="admin-sidebar-head">
+      <a href="index.html" class="admin-sidebar-logo">
+        <img src="../assets/images/tag-hero-mark.png" alt="TAG" />
+        <span class="admin-sidebar-logo-text">TAG Admin</span>
+      </a>
+      <button class="admin-sidebar-collapse-btn" id="sidebarCollapseBtn" aria-label="Collapse sidebar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6" />
+        </svg>
+      </button>
+    </div>
+
+    <nav class="admin-nav" aria-label="Dashboard navigation">
+      <p class="admin-nav-section-label">General</p>
+
+      <a href="index.html" class="admin-nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+          stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="9" />
+          <rect x="14" y="3" width="7" height="5" />
+          <rect x="14" y="12" width="7" height="9" />
+          <rect x="3" y="16" width="7" height="5" />
+        </svg>
+        <span class="admin-nav-label">Dashboard</span>
+        <span class="admin-nav-tooltip">Dashboard</span>
+      </a>
+
+      <a href="products.html" class="admin-nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M16.5 9.4 7.5 4.21" />
+          <path
+            d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+          <line x1="12" y1="22.08" x2="12" y2="12" />
+        </svg>
+        <span class="admin-nav-label">Products</span>
+        <span class="admin-nav-tooltip">Products</span>
+      </a>
+
+      <p class="admin-nav-section-label">Sales</p>
+
+      <a href="orders.html" class="admin-nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <path d="M16 10a4 4 0 0 1-8 0" />
+        </svg>
+        <span class="admin-nav-label">Orders</span>
+        <span class="admin-nav-tooltip">Orders</span>
+      </a>
+
+      <a href="customers.html" class="admin-nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+          <circle cx="9" cy="7" r="4" />
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+          <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+        </svg>
+        <span class="admin-nav-label">Customers</span>
+        <span class="admin-nav-tooltip">Customers</span>
+      </a>
+
+      <a href="analytics.html" class="admin-nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+          stroke-linejoin="round">
+          <line x1="18" y1="20" x2="18" y2="10" />
+          <line x1="12" y1="20" x2="12" y2="4" />
+          <line x1="6" y1="20" x2="6" y2="14" />
+        </svg>
+        <span class="admin-nav-label">Analytics</span>
+        <span class="admin-nav-tooltip">Analytics</span>
+      </a>
+
+      <div class="admin-nav-divider"></div>
+
+      <a href="settings.html" class="admin-nav-item active" aria-current="page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+          stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3" />
+          <path
+            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+        </svg>
+        <span class="admin-nav-label">Settings</span>
+        <span class="admin-nav-tooltip">Settings</span>
+      </a>
+    </nav>
+
+    <div class="admin-sidebar-foot">
+      <a href="admin-account.html" class="admin-sidebar-user">
+        <div class="admin-sidebar-user-avatar">A</div>
+        <div class="admin-sidebar-user-info">
+          <p class="admin-sidebar-user-name">Admin</p>
+          <p class="admin-sidebar-user-email">admin@tag.com</p>
+        </div>
+      </a>
+      <a href="../index.html" class="admin-sidebar-foot-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+          <polyline points="16 17 21 12 16 7" />
+          <line x1="21" y1="12" x2="9" y2="12" />
+        </svg>
+        <span class="admin-sidebar-foot-text">Logout</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ============================================
+       MAIN
+       ============================================ -->
+  <div class="admin-main">
+
+    <!-- TOPBAR (reused from Dashboard) -->
+    <header class="admin-topbar" id="adminTopbar">
+      <div class="admin-topbar-left">
+        <button class="admin-mobile-menu-btn admin-icon-btn" id="adminMobileMenuBtn" aria-label="Open menu">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
+        </button>
+
+        <h1 class="admin-page-title" id="adminPageTitle">Settings</h1>
+
+        <div class="admin-search-wrap">
+          <label class="admin-search">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+            <input type="text" id="adminSearchInput" placeholder="Search settings…" autocomplete="off" />
+          </label>
+        </div>
+      </div>
+
+      <div class="admin-topbar-right">
+        <button class="admin-icon-btn" aria-label="Notifications">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" />
+            <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+          </svg>
+          <span class="admin-notif-badge"></span>
+        </button>
+
+        <div class="admin-profile">
+          <div class="admin-avatar">A</div>
+          <div class="admin-profile-info">
+            <span class="admin-profile-name">Admin</span>
+            <span class="admin-profile-role">Store Owner</span>
+          </div>
+          <svg class="admin-profile-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTENT -->
+    <main class="admin-content">
+
+      <!-- Page Header -->
+      <section class="admin-welcome">
+        <div>
+          <p class="admin-welcome-eyebrow">Configuration</p>
+          <h2 class="admin-welcome-title">Settings</h2>
+          <p class="admin-welcome-sub">Manage your store preferences and configuration</p>
+        </div>
+      </section>
+
+      <!-- Settings Form -->
+      <div class="admin-settings-form">
+
+        <!-- ── Store Settings ── -->
+        <section class="admin-form-panel">
+          <div class="admin-form-panel-head">
+            <h3 class="admin-form-panel-title">Store Settings</h3>
+            <p class="admin-form-panel-hint">Basic information about your store</p>
+          </div>
+          <div class="admin-form-body">
+            <div class="admin-form-row--split">
+              <div class="admin-field">
+                <label class="admin-label" for="storeName">Store Name</label>
+                <input type="text" id="storeName" class="admin-input" placeholder="TAG Store" />
+              </div>
+              <div class="admin-field">
+                <label class="admin-label" for="storeEmail">Store Email</label>
+                <input type="email" id="storeEmail" class="admin-input" placeholder="hello@tag-store.com" />
+              </div>
+            </div>
+
+            <div class="admin-form-row--split">
+              <div class="admin-field">
+                <label class="admin-label" for="storePhone">Store Phone</label>
+                <input type="tel" id="storePhone" class="admin-input" placeholder="+20 (150) 000-0000" />
+              </div>
+              <div class="admin-field">
+                <label class="admin-label" for="storeGovernorate">Governorate</label>
+                <div class="admin-select-wrap admin-select-wrap--full">
+                  <select id="storeGovernorate" class="admin-select admin-select--full admin-select-custom">
+                    <option value="alexandria">Alexandria</option>
+                    <option value="cairo">Cairo</option>
+                    <option value="giza">Giza</option>
+                    <option value="dakahlia">Dakahlia</option>
+                    <option value="sharqia">Sharqia</option>
+                    <option value="beheira">Beheira</option>
+                    <option value="monufia">Monufia</option>
+                    <option value="qalyubia">Qalyubia</option>
+                    <option value="kafr_el_sheikh">Kafr El Sheikh</option>
+                    <option value="gharbia">Gharbia</option>
+                    <option value="damietta">Damietta</option>
+                    <option value="port_said">Port Said</option>
+                    <option value="ismailia">Ismailia</option>
+                    <option value="suez">Suez</option>
+                    <option value="fayoum">Fayoum</option>
+                    <option value="beni_suef">Beni Suef</option>
+                    <option value="minya">Minya</option>
+                    <option value="assiut">Assiut</option>
+                    <option value="sohag">Sohag</option>
+                    <option value="qena">Qena</option>
+                    <option value="luxor">Luxor</option>
+                    <option value="aswan">Aswan</option>
+                    <option value="red_sea">Red Sea</option>
+                    <option value="new_valley">New Valley</option>
+                    <option value="matrouh">Matrouh</option>
+                    <option value="north_sinai">North Sinai</option>
+                    <option value="south_sinai">South Sinai</option>
+                  </select>
+                  <svg class="admin-select-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="admin-form-panel-actions">
+            <button type="button" class="btn-form btn-white" data-save="store">Save Store Settings</button>
+          </div>
+        </section>
+
+        <!-- ── Shipping Settings ── -->
+        <section class="admin-form-panel">
+          <div class="admin-form-panel-head">
+            <h3 class="admin-form-panel-title">Shipping Settings</h3>
+            <p class="admin-form-panel-hint">Configure shipping rules and rates</p>
+          </div>
+          <div class="admin-form-body">
+            <div class="admin-settings-toggle-row">
+              <div class="admin-settings-toggle-info">
+                <label class="admin-toggle-label" for="shippingEnabled">Shipping Enabled</label>
+                <p class="admin-helper-text">Enable or disable shipping calculations at checkout</p>
+              </div>
+              <label class="admin-toggle">
+                <input type="checkbox" id="shippingEnabled" />
+                <span class="admin-toggle-track">
+                  <span class="admin-toggle-thumb"></span>
+                </span>
+              </label>
+            </div>
+
+            <div class="admin-form-row--split" id="shippingFieldsRow">
+              <div class="admin-field">
+                <label class="admin-label" for="freeShippingThreshold">Free Shipping Threshold</label>
+                <div class="admin-input-prefix">
+                  <span class="admin-input-prefix-mark">EGP</span>
+                  <input type="number" id="freeShippingThreshold" class="admin-input" placeholder="100.00" min="0"
+                    step="0.01" />
+                </div>
+                <p class="admin-helper-text">Orders above this amount qualify for free shipping</p>
+              </div>
+              <div class="admin-field">
+                <label class="admin-label" for="defaultShippingFee">Default Shipping Fee</label>
+                <div class="admin-input-prefix">
+                  <span class="admin-input-prefix-mark">EGP</span>
+                  <input type="number" id="defaultShippingFee" class="admin-input" placeholder="9.99" min="0"
+                    step="0.01" />
+                </div>
+                <p class="admin-helper-text">Standard flat rate applied when below threshold</p>
+              </div>
+            </div>
+          </div>
+          <div class="admin-form-panel-actions">
+            <button type="button" class="btn-form btn-white" data-save="shipping">Save Shipping Settings</button>
+          </div>
+        </section>
+
+        <!-- ── Notification Settings ── -->
+        <section class="admin-form-panel">
+          <div class="admin-form-panel-head">
+            <h3 class="admin-form-panel-title">Notification Settings</h3>
+            <p class="admin-form-panel-hint">Choose which events trigger notifications</p>
+          </div>
+          <div class="admin-form-body">
+            <div class="admin-settings-toggle-row">
+              <div class="admin-settings-toggle-info">
+                <label class="admin-toggle-label" for="notifyNewOrders">New Order Notifications</label>
+                <p class="admin-helper-text">Get notified when a new order is placed</p>
+              </div>
+              <label class="admin-toggle">
+                <input type="checkbox" id="notifyNewOrders" />
+                <span class="admin-toggle-track">
+                  <span class="admin-toggle-thumb"></span>
+                </span>
+              </label>
+            </div>
+
+            <div class="admin-settings-toggle-row">
+              <div class="admin-settings-toggle-info">
+                <label class="admin-toggle-label" for="notifyLowStock">Low Stock Notifications</label>
+                <p class="admin-helper-text">Receive alerts when product inventory falls below the threshold</p>
+              </div>
+              <label class="admin-toggle">
+                <input type="checkbox" id="notifyLowStock" />
+                <span class="admin-toggle-track">
+                  <span class="admin-toggle-thumb"></span>
+                </span>
+              </label>
+            </div>
+
+            <div class="admin-settings-toggle-row">
+              <div class="admin-settings-toggle-info">
+                <label class="admin-toggle-label" for="notifyCustomerReg">Customer Registration Notifications</label>
+                <p class="admin-helper-text">Get notified when a new customer account is created</p>
+              </div>
+              <label class="admin-toggle">
+                <input type="checkbox" id="notifyCustomerReg" />
+                <span class="admin-toggle-track">
+                  <span class="admin-toggle-thumb"></span>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div class="admin-form-panel-actions">
+            <button type="button" class="btn-form btn-white" data-save="notifications">Save Notification
+              Settings</button>
+          </div>
+        </section>
+
+        <!-- ── Appearance Settings ── -->
+        <section class="admin-form-panel">
+          <div class="admin-form-panel-head">
+            <h3 class="admin-form-panel-title">Appearance</h3>
+            <p class="admin-form-panel-hint">Customize your dashboard experience</p>
+          </div>
+          <div class="admin-form-body">
+            <div class="admin-form-row--split">
+              <div class="admin-field">
+                <label class="admin-label" for="sidebarDefaultState">Sidebar Default State</label>
+                <div class="admin-select-wrap admin-select-wrap--full">
+                  <select id="sidebarDefaultState" class="admin-select admin-select--full admin-select-custom">
+                    <option value="expanded">Expanded</option>
+                    <option value="collapsed">Collapsed</option>
+                  </select>
+                  <svg class="admin-select-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
+                </div>
+              </div>
+              <div class="admin-field">
+                <label class="admin-label" for="rowsPerPage">Rows Per Page</label>
+                <div class="admin-select-wrap admin-select-wrap--full">
+                  <select id="rowsPerPage" class="admin-select admin-select--full admin-select-custom">
+                    <option value="5">5</option>
+                    <option value="8">8</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                  </select>
+                  <svg class="admin-select-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="admin-form-panel-actions">
+            <button type="button" class="btn-form btn-white" data-save="appearance">Save Appearance Settings</button>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Toast -->
+  <div class="admin-toast" id="adminToast"></div>
+
+  <script src="../js/api.js?v=6"></script>
+  <script src="js/dashboard.js?v=6"></script>
+  <script src="js/settings.js?v=5"></script>
+<script src="../js/cursor.js?v=8"></script>
+<script src="js/notifications.js?v=5" defer></script>
+</body>
+
+</html>

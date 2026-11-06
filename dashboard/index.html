@@ -1,0 +1,750 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — TAG Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=block"
+    rel="stylesheet" />
+  <!-- Shared TAG brand design system: colors, fonts, loader, cursor, buttons -->
+  <link rel="stylesheet" href="../css/style.css?v=7" />
+  <!-- Admin dashboard layout & components -->
+  <link rel="stylesheet" href="css/dashboard.css?v=5" />
+</head>
+
+<body class="admin-body">
+
+  <!-- ============================================
+       LOADER (reused from storefront)
+       ============================================ -->
+  <div class="loader" id="loader">
+    <div class="loader-mark">
+      <img src="../assets/images/logo-white.png" alt="TAG Logo">
+    </div>
+    <div class="loader-line"><span></span></div>
+  </div>
+
+  <!-- ============================================
+       CUSTOM CURSOR (reused from storefront)
+       ============================================ -->
+  <div class="cursor-ring" id="cursorRing">
+    <div class="cursor-ring-inner"></div>
+  </div>
+  <div class="cursor-dot" id="cursorDot">
+    <div class="cursor-dot-inner"></div>
+  </div>
+
+  <!-- ============================================
+       SIDEBAR
+       ============================================ -->
+  <div class="admin-sidebar-overlay" id="adminSidebarOverlay"></div>
+
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="admin-sidebar-head">
+      <a href="index.html" class="admin-sidebar-logo">
+        <img src="../assets/images/tag-hero-mark.png" alt="TAG" />
+        <span class="admin-sidebar-logo-text">TAG Admin</span>
+      </a>
+      <button class="admin-sidebar-collapse-btn" id="sidebarCollapseBtn" aria-label="Collapse sidebar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6" />
+        </svg>
+      </button>
+    </div>
+
+    <nav class="admin-nav" aria-label="Dashboard navigation">
+      <p class="admin-nav-section-label">General</p>
+
+      <a href="index.html" class="admin-nav-item active" aria-current="page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+          stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="9" />
+          <rect x="14" y="3" width="7" height="5" />
+          <rect x="14" y="12" width="7" height="9" />
+          <rect x="3" y="16" width="7" height="5" />
+        </svg>
+        <span class="admin-nav-label">Dashboard</span>
+        <span class="admin-nav-tooltip">Dashboard</span>
+      </a>
+
+      <a href="products.html" class="admin-nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M16.5 9.4 7.5 4.21" />
+          <path
+            d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+          <line x1="12" y1="22.08" x2="12" y2="12" />
+        </svg>
+        <span class="admin-nav-label">Products</span>
+        <span class="admin-nav-tooltip">Products</span>
+      </a>
+
+            <p class="admin-nav-section-label">Sales</p>
+
+      <a href="orders.html" class="admin-nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <path d="M16 10a4 4 0 0 1-8 0" />
+        </svg>
+        <span class="admin-nav-label">Orders</span>
+        <span class="admin-nav-tooltip">Orders</span>
+      </a>
+
+      <a href="customers.html" class="admin-nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+          <circle cx="9" cy="7" r="4" />
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+          <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+        </svg>
+        <span class="admin-nav-label">Customers</span>
+        <span class="admin-nav-tooltip">Customers</span>
+      </a>
+
+      <a href="analytics.html" class="admin-nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+          stroke-linejoin="round">
+          <line x1="18" y1="20" x2="18" y2="10" />
+          <line x1="12" y1="20" x2="12" y2="4" />
+          <line x1="6" y1="20" x2="6" y2="14" />
+        </svg>
+        <span class="admin-nav-label">Analytics</span>
+        <span class="admin-nav-tooltip">Analytics</span>
+      </a>
+
+      <div class="admin-nav-divider"></div>
+
+      <a href="settings.html" class="admin-nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+          stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3" />
+          <path
+            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+        </svg>
+        <span class="admin-nav-label">Settings</span>
+        <span class="admin-nav-tooltip">Settings</span>
+      </a>
+    </nav>
+
+    <div class="admin-sidebar-foot">
+      <a href="admin-account.html" class="admin-sidebar-user">
+        <div class="admin-sidebar-user-avatar">A</div>
+        <div class="admin-sidebar-user-info">
+          <p class="admin-sidebar-user-name">Admin</p>
+          <p class="admin-sidebar-user-email">admin@tag.com</p>
+        </div>
+      </a>
+      <a href="../index.html" class="admin-sidebar-foot-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+          <polyline points="16 17 21 12 16 7" />
+          <line x1="21" y1="12" x2="9" y2="12" />
+        </svg>
+        <span class="admin-sidebar-foot-text">Logout</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ============================================
+       MAIN
+       ============================================ -->
+  <div class="admin-main">
+
+    <!-- TOPBAR -->
+    <header class="admin-topbar" id="adminTopbar">
+      <div class="admin-topbar-left">
+        <button class="admin-mobile-menu-btn admin-icon-btn" id="adminMobileMenuBtn" aria-label="Open menu">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
+        </button>
+
+        <h1 class="admin-page-title" id="adminPageTitle">Dashboard</h1>
+
+        <div class="admin-search-wrap">
+          <label class="admin-search">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+            <input type="text" id="adminSearchInput" placeholder="Search orders, products, customers…"
+              autocomplete="off" />
+          </label>
+        </div>
+      </div>
+
+      <div class="admin-topbar-right">
+        <button class="admin-icon-btn" aria-label="Notifications">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" />
+            <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+          </svg>
+          <span class="admin-notif-badge"></span>
+        </button>
+
+        <div class="admin-profile">
+          <div class="admin-avatar">A</div>
+          <div class="admin-profile-info">
+            <span class="admin-profile-name">Admin</span>
+            <span class="admin-profile-role">Store Owner</span>
+          </div>
+          <svg class="admin-profile-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTENT -->
+    <main class="admin-content">
+
+      <!-- Welcome -->
+      <section class="admin-welcome">
+        <div>
+          <p class="admin-welcome-eyebrow">Overview</p>
+          <h2 class="admin-welcome-title">Welcome back, Admin</h2>
+          <p class="admin-welcome-sub">Here's what's happening with TAG today.</p>
+        </div>
+        <div class="admin-welcome-date" id="adminWelcomeDate"></div>
+      </section>
+
+      <!-- Stat Cards -->
+      <section class="admin-stats-grid" aria-label="Key metrics">
+
+        <article class="admin-stat-card">
+          <div class="admin-stat-card-head">
+            <div class="admin-stat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round">
+                <line x1="12" y1="1" x2="12" y2="23" />
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+              </svg>
+            </div>
+            <span class="admin-stat-trend up">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7" />
+                <polyline points="7 7 17 7 17 17" />
+              </svg>
+              18.2%
+            </span>
+          </div>
+          <p class="admin-stat-value" data-count-to="128450" data-suffix=" EGP">0 EGP</p>
+          <p class="admin-stat-label">Total Revenue</p>
+          <p class="admin-stat-sub">vs. last month</p>
+        </article>
+
+        <article class="admin-stat-card">
+          <div class="admin-stat-card-head">
+            <div class="admin-stat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <path d="M16 10a4 4 0 0 1-8 0" />
+              </svg>
+            </div>
+            <span class="admin-stat-trend up">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7" />
+                <polyline points="7 7 17 7 17 17" />
+              </svg>
+              9.4%
+            </span>
+          </div>
+          <p class="admin-stat-value" data-count-to="1284">0</p>
+          <p class="admin-stat-label">Orders</p>
+          <p class="admin-stat-sub">342 this week</p>
+        </article>
+
+        <article class="admin-stat-card">
+          <div class="admin-stat-card-head">
+            <div class="admin-stat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M16.5 9.4 7.5 4.21" />
+                <path
+                  d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+                <line x1="12" y1="22.08" x2="12" y2="12" />
+              </svg>
+            </div>
+            <span class="admin-stat-trend up">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7" />
+                <polyline points="7 7 17 7 17 17" />
+              </svg>
+              4 new
+            </span>
+          </div>
+          <p class="admin-stat-value" data-count-to="96">0</p>
+          <p class="admin-stat-label">Products</p>
+          <p class="admin-stat-sub" id="productsLowStockSub">Low in stock</p>
+        </article>
+
+        <article class="admin-stat-card">
+          <div class="admin-stat-card-head">
+            <div class="admin-stat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+            </div>
+            <span class="admin-stat-trend up">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7" />
+                <polyline points="7 7 17 7 17 17" />
+              </svg>
+              12.7%
+            </span>
+          </div>
+          <p class="admin-stat-value" data-count-to="3842">0</p>
+          <p class="admin-stat-label">Customers</p>
+          <p class="admin-stat-sub">268 new this month</p>
+        </article>
+
+      </section>
+
+      <!-- Charts Area -->
+      <section class="admin-charts-grid" aria-label="Store performance charts">
+
+        <!-- Revenue -->
+        <div class="admin-panel admin-panel--revenue">
+          <div class="admin-panel-head">
+            <div>
+              <p class="admin-panel-eyebrow">Revenue</p>
+              <div class="admin-panel-figure">
+                <span class="admin-panel-figure-value">128,450 EGP</span>
+                <span class="admin-panel-figure-trend up">+18.2%</span>
+              </div>
+            </div>
+            <div class="admin-tabs" id="revenueTabs">
+              <button class="admin-tab" data-range="7d">7D</button>
+              <button class="admin-tab active" data-range="30d">30D</button>
+              <button class="admin-tab" data-range="90d">90D</button>
+            </div>
+          </div>
+
+          <div class="admin-line-chart-wrap">
+            <svg viewBox="0 0 620 190" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="revenueFill" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#ffffff" stop-opacity="0.18" />
+                  <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+              <g class="admin-line-chart-grid">
+                <line x1="0" y1="10" x2="620" y2="10" />
+                <line x1="0" y1="60" x2="620" y2="60" />
+                <line x1="0" y1="110" x2="620" y2="110" />
+                <line x1="0" y1="160" x2="620" y2="160" />
+              </g>
+              <path class="admin-line-chart-area" fill="url(#revenueFill)"
+                d="M0,140 L60,120 L120,132 L180,95 L240,105 L300,70 L360,85 L420,52 L480,60 L540,30 L600,42 L620,38 L620,190 L0,190 Z" />
+              <polyline class="admin-line-chart-path"
+                points="0,140 60,120 120,132 180,95 240,105 300,70 360,85 420,52 480,60 540,30 600,42 620,38" />
+              <circle class="admin-line-chart-dot" cx="620" cy="38" r="4" />
+            </svg>
+          </div>
+          <div class="admin-line-chart-axis">
+            <span>Jul 8</span>
+            <span>Jul 15</span>
+            <span>Jul 22</span>
+            <span>Jul 29</span>
+            <span>Aug 5</span>
+          </div>
+        </div>
+
+        <!-- Visitors -->
+        <div class="admin-panel admin-panel--visitors">
+          <div class="admin-panel-head">
+            <div>
+              <p class="admin-panel-eyebrow">Visitors</p>
+              <div class="admin-panel-figure">
+                <span class="admin-panel-figure-value">8,240</span>
+                <span class="admin-panel-figure-trend up">+6.1%</span>
+              </div>
+            </div>
+          </div>
+          <div class="admin-donut-panel-body">
+            <div class="admin-donut-wrap">
+              <div class="admin-donut" id="visitorsDonut" style="--admin-donut-deg: 0;"></div>
+              <div class="admin-donut-center">
+                <span class="admin-donut-center-value">8.2k</span>
+                <span class="admin-donut-center-label">Total</span>
+              </div>
+            </div>
+            <div class="admin-legend">
+              <div class="admin-legend-row">
+                <span class="admin-legend-dot"></span>
+                <span class="admin-legend-label">New visitors</span>
+                <span class="admin-legend-value">64%</span>
+              </div>
+              <div class="admin-legend-row is-muted">
+                <span class="admin-legend-dot"></span>
+                <span class="admin-legend-label">Returning</span>
+                <span class="admin-legend-value">36%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sales Overview -->
+        <div class="admin-panel admin-panel--sales">
+          <div class="admin-panel-head">
+            <div>
+              <p class="admin-panel-eyebrow">Sales Overview</p>
+              <div class="admin-panel-figure">
+                <span class="admin-panel-figure-value">By Category</span>
+              </div>
+            </div>
+          </div>
+          <div class="admin-hbar-list" id="salesOverviewList">
+            <div class="admin-hbar-row">
+              <span class="admin-hbar-label">Hoodies</span>
+              <span class="admin-hbar-track">
+                <span class="admin-hbar-fill" data-value="34"></span>
+              </span>
+              <span class="admin-hbar-value">34%</span>
+            </div>
+            <div class="admin-hbar-row">
+              <span class="admin-hbar-label">Tees</span>
+              <span class="admin-hbar-track">
+                <span class="admin-hbar-fill" data-value="28"></span>
+              </span>
+              <span class="admin-hbar-value">28%</span>
+            </div>
+            <div class="admin-hbar-row">
+              <span class="admin-hbar-label">Denim</span>
+              <span class="admin-hbar-track">
+                <span class="admin-hbar-fill" data-value="18"></span>
+              </span>
+              <span class="admin-hbar-value">18%</span>
+            </div>
+            <div class="admin-hbar-row">
+              <span class="admin-hbar-label">Outerwear</span>
+              <span class="admin-hbar-track">
+                <span class="admin-hbar-fill" data-value="12"></span>
+              </span>
+              <span class="admin-hbar-value">12%</span>
+            </div>
+            <div class="admin-hbar-row">
+              <span class="admin-hbar-label">Accessories</span>
+              <span class="admin-hbar-track">
+                <span class="admin-hbar-fill" data-value="8"></span>
+              </span>
+              <span class="admin-hbar-value">8%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Orders -->
+        <div class="admin-panel admin-panel--orders">
+          <div class="admin-panel-head">
+            <div>
+              <p class="admin-panel-eyebrow">Orders</p>
+              <div class="admin-panel-figure">
+                <span class="admin-panel-figure-value">This Week</span>
+              </div>
+            </div>
+          </div>
+          <div class="admin-vbar-chart" id="ordersBarChart">
+            <div class="admin-vbar-col">
+              <span class="admin-vbar" data-value="62"></span>
+              <span class="admin-vbar-day">Mon</span>
+            </div>
+            <div class="admin-vbar-col">
+              <span class="admin-vbar" data-value="78"></span>
+              <span class="admin-vbar-day">Tue</span>
+            </div>
+            <div class="admin-vbar-col">
+              <span class="admin-vbar" data-value="54"></span>
+              <span class="admin-vbar-day">Wed</span>
+            </div>
+            <div class="admin-vbar-col">
+              <span class="admin-vbar" data-value="91"></span>
+              <span class="admin-vbar-day">Thu</span>
+            </div>
+            <div class="admin-vbar-col is-peak">
+              <span class="admin-vbar" data-value="100"></span>
+              <span class="admin-vbar-day">Fri</span>
+            </div>
+            <div class="admin-vbar-col">
+              <span class="admin-vbar" data-value="88"></span>
+              <span class="admin-vbar-day">Sat</span>
+            </div>
+            <div class="admin-vbar-col">
+              <span class="admin-vbar" data-value="40"></span>
+              <span class="admin-vbar-day">Sun</span>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Recent Orders + Recent Activity -->
+      <section class="admin-bottom-grid">
+
+        <div class="admin-panel">
+          <div class="admin-section-head">
+            <h2 class="admin-section-title">Recent Orders</h2>
+            <a href="orders.html" class="admin-section-link">View All</a>
+          </div>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Total</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="admin-table-order-id">#TAG-10482</td>
+                  <td>
+                    <span class="admin-table-customer">
+                      <span class="admin-table-customer-avatar">M</span>
+                      Marcus Bell
+                    </span>
+                  </td>
+                  <td>Aug 5, 2026</td>
+                  <td><span class="admin-badge status-processing">Processing</span></td>
+                  <td class="admin-table-total">245.00 EGP</td>
+                  <td>
+                    <a href="#" class="admin-table-action-btn" aria-label="View order #TAG-10482">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                        <circle cx="12" cy="12" r="3" />
+                      </svg>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="admin-table-order-id">#TAG-10481</td>
+                  <td>
+                    <span class="admin-table-customer">
+                      <span class="admin-table-customer-avatar">E</span>
+                      Elena Cruz
+                    </span>
+                  </td>
+                  <td>Aug 5, 2026</td>
+                  <td><span class="admin-badge status-pending">Pending</span></td>
+                  <td class="admin-table-total">120.00 EGP</td>
+                  <td>
+                    <a href="#" class="admin-table-action-btn" aria-label="View order #TAG-10481">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                        <circle cx="12" cy="12" r="3" />
+                      </svg>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="admin-table-order-id">#TAG-10480</td>
+                  <td>
+                    <span class="admin-table-customer">
+                      <span class="admin-table-customer-avatar">J</span>
+                      Jordan Lee
+                    </span>
+                  </td>
+                  <td>Aug 4, 2026</td>
+                  <td><span class="admin-badge status-completed">Completed</span></td>
+                  <td class="admin-table-total">95.00 EGP</td>
+                  <td>
+                    <a href="#" class="admin-table-action-btn" aria-label="View order #TAG-10480">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                        <circle cx="12" cy="12" r="3" />
+                      </svg>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="admin-table-order-id">#TAG-10479</td>
+                  <td>
+                    <span class="admin-table-customer">
+                      <span class="admin-table-customer-avatar">S</span>
+                      Sofia Ricci
+                    </span>
+                  </td>
+                  <td>Aug 4, 2026</td>
+                  <td><span class="admin-badge status-completed">Completed</span></td>
+                  <td class="admin-table-total">380.00 EGP</td>
+                  <td>
+                    <a href="#" class="admin-table-action-btn" aria-label="View order #TAG-10479">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                        <circle cx="12" cy="12" r="3" />
+                      </svg>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="admin-table-order-id">#TAG-10478</td>
+                  <td>
+                    <span class="admin-table-customer">
+                      <span class="admin-table-customer-avatar">D</span>
+                      Daniel Okafor
+                    </span>
+                  </td>
+                  <td>Aug 3, 2026</td>
+                  <td><span class="admin-badge status-cancelled">Cancelled</span></td>
+                  <td class="admin-table-total">65.00 EGP</td>
+                  <td>
+                    <a href="#" class="admin-table-action-btn" aria-label="View order #TAG-10478">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                        <circle cx="12" cy="12" r="3" />
+                      </svg>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="admin-table-order-id">#TAG-10477</td>
+                  <td>
+                    <span class="admin-table-customer">
+                      <span class="admin-table-customer-avatar">P</span>
+                      Priya Nair
+                    </span>
+                  </td>
+                  <td>Aug 3, 2026</td>
+                  <td><span class="admin-badge status-completed">Completed</span></td>
+                  <td class="admin-table-total">160.00 EGP</td>
+                  <td>
+                    <a href="#" class="admin-table-action-btn" aria-label="View order #TAG-10477">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                        <circle cx="12" cy="12" r="3" />
+                      </svg>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="admin-panel">
+          <div class="admin-section-head">
+            <h2 class="admin-section-title">Recent Activity</h2>
+            <a href="orders.html" class="admin-section-link">View All</a>
+          </div>
+          <div class="admin-timeline">
+            <div class="admin-timeline-item">
+              <span class="admin-timeline-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+                  <line x1="3" y1="6" x2="21" y2="6" />
+                  <path d="M16 10a4 4 0 0 1-8 0" />
+                </svg>
+              </span>
+              <div class="admin-timeline-body">
+                <p class="admin-timeline-title">New order <strong>#TAG-10482</strong> placed</p>
+                <p class="admin-timeline-time">5 minutes ago</p>
+              </div>
+            </div>
+            <div class="admin-timeline-item">
+              <span class="admin-timeline-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M16.5 9.4 7.5 4.21" />
+                  <path
+                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                  <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+                  <line x1="12" y1="22.08" x2="12" y2="12" />
+                </svg>
+              </span>
+              <div class="admin-timeline-body">
+                <p class="admin-timeline-title">Product updated — <strong>Box Logo Hoodie</strong> stock adjusted</p>
+                <p class="admin-timeline-time">42 minutes ago</p>
+              </div>
+            </div>
+            <div class="admin-timeline-item">
+              <span class="admin-timeline-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+              </span>
+              <div class="admin-timeline-body">
+                <p class="admin-timeline-title">Customer <strong>Priya Nair</strong> registered</p>
+                <p class="admin-timeline-time">1 hour ago</p>
+              </div>
+            </div>
+            <div class="admin-timeline-item">
+              <span class="admin-timeline-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </span>
+              <div class="admin-timeline-body">
+                <p class="admin-timeline-title">Order <strong>#TAG-10479</strong> marked as completed</p>
+                <p class="admin-timeline-time">3 hours ago</p>
+              </div>
+            </div>
+            <div class="admin-timeline-item">
+              <span class="admin-timeline-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+                  <line x1="3" y1="6" x2="21" y2="6" />
+                  <path d="M16 10a4 4 0 0 1-8 0" />
+                </svg>
+              </span>
+              <div class="admin-timeline-body">
+                <p class="admin-timeline-title">New order <strong>#TAG-10478</strong> placed</p>
+                <p class="admin-timeline-time">5 hours ago</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+
+  <script src="../js/api.js?v=6"></script>
+  <script src="js/dashboard.js?v=6"></script>
+<script src="../js/cursor.js?v=8"></script>
+<script src="js/notifications.js?v=5" defer></script>
+</body>
+
+</html>

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Admin Login — TAG</title>
+  <link rel="stylesheet" href="../css/style.css?v=7">
+  <link rel="stylesheet" href="../css/auth.css?v=5">
+  <link rel="stylesheet" href="css/dashboard.css?v=5">
+</head>
+<body class="auth-page">
+  <main class="auth-container">
+    <section class="auth-card">
+      <a href="../index.html" class="auth-logo">TAG ADMIN</a>
+      <h1 class="auth-title">Sign in to dashboard</h1>
+      <p class="auth-subtitle">Use your admin credentials to manage products, orders, and customers.</p>
+      
+      <form id="adminLoginForm" class="auth-form">
+        <div class="auth-field">
+          <label for="adminEmail">Email</label>
+          <input id="adminEmail" class="auth-input" type="email"           placeholder="Enter your email" autocomplete="username" required>
+        </div>
+        <div class="auth-field">
+          <label for="adminPassword">Password</label>
+          <input id="adminPassword" class="auth-input" type="password"           placeholder="Enter your password" autocomplete="current-password" required>
+        </div>
+        <button class="btn-white auth-submit" type="submit">Sign In</button>
+      </form>
+      <p id="adminLoginError" class="auth-error" style="margin-top:1rem;text-align:center;font-size:13px;color:#e74c3c;"></p>
+    </section>
+  </main>
+  <style>
+    .auth-logo { font-size: 12px; letter-spacing: 0.12em; color: var(--tag-200); text-decoration: none; margin-bottom: 1.5rem; display: block; }
+  </style>
+  <script src="../js/api.js?v=6"></script>
+  <script>
+    document.getElementById('adminLoginForm').addEventListener('submit', async function (event) {
+      event.preventDefault();
+      const email = document.getElementById('adminEmail').value.trim();
+      const password = document.getElementById('adminPassword').value;
+      const errorEl = document.getElementById('adminLoginError');
+      errorEl.textContent = '';
+
+      const submitBtn = document.querySelector('.auth-submit');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Signing in...';
+
+      try {
+        // First check if the API is reachable
+        try {
+          await fetch(TAG.api.baseUrl + '/health', { method: 'GET' });
+        } catch (fetchErr) {
+          throw new Error('Cannot connect to server. Please refresh the page and try again.');
+        }
+
+        const data = await TAG.api.login({ email, password }, true);
+        if (data.user.role !== 'admin') {
+          TAG.api.setToken(null, true);
+          TAG.api.setAuthUser(null, true);
+          throw new Error('This account does not have admin access.');
+        }
+        // Store admin user info for sidebar display
+        localStorage.setItem('tag_admin_auth', JSON.stringify({
+          loggedIn: true,
+          name: data.user.name || data.user.email,
+          email: data.user.email,
+          role: data.user.role,
+        }));
+        window.location.href = 'index.html';
+      } catch (err) {
+        // Show specific error messages
+        if (err.status === 401) {
+          errorEl.textContent = 'Invalid email or password. Please check your credentials.';
+        } else if (err.status === 429) {
+          errorEl.textContent = 'Too many attempts. Please wait a minute and try again.';
+        } else if (err.status === 404) {
+          errorEl.textContent = 'Account not found. Please check your email.';
+        } else {
+          errorEl.textContent = err.message || 'Login failed. Please try again.';
+        }
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Sign In';
+      }
+    });
+  </script>
+<div class="cursor-ring" id="cursorRing"><div class="cursor-ring-inner"></div></div>
+<div class="cursor-dot" id="cursorDot"><div class="cursor-dot-inner"></div></div>
+<script src="../js/cursor.js?v=8"></script>
+</body>
+</html>

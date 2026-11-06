@@ -1,0 +1,801 @@
+/* ============================================
+   TAG ADMIN — Customers Page (Phase 2)
+   Built entirely on top of the design tokens and
+   components already defined in ../../css/style.css
+   and dashboard.css. This file only adds the
+   customers-specific styles: table, badges for
+   customer statuses, customer detail slide-in panel,
+   responsive stacked cards, and animations.
+   No new colors or fonts are introduced.
+   ============================================ */
+
+/* ---------------------------------- Toolbar ---------------------------------- */
+.admin-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+/* ---------------------------------- Result count ---------------------------------- */
+.admin-products-result-count {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--admin-text-faint);
+  flex-shrink: 0;
+}
+
+/* ============================================
+   CUSTOMER TABLE — specifics
+   ============================================ */
+.admin-customers-table {
+  min-width: 860px;
+}
+
+.admin-customers-table tbody tr {
+  opacity: 0;
+  animation: fadeUp 450ms var(--ease-tag) forwards;
+}
+
+/* Customer cell with avatar */
+.admin-customer-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.admin-customer-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--admin-panel-raised);
+  border: 1px solid var(--admin-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--admin-text-dim);
+  flex-shrink: 0;
+  text-transform: uppercase;
+}
+
+.admin-customer-info {
+  min-width: 0;
+}
+
+.admin-customer-name {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--admin-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 170px;
+}
+
+.admin-customer-email-cell {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--admin-text-faint);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 190px;
+}
+
+/* Orders & Total — mono font */
+.admin-customer-orders {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--admin-text);
+}
+
+.admin-customer-total-spent {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--admin-text);
+  font-weight: 500;
+}
+
+/* Date cell */
+.admin-customer-last-order {
+  font-size: 12.5px;
+  color: var(--admin-text-dim);
+}
+
+/* ============================================
+   BADGES — customer statuses
+   ============================================ */
+.admin-badge.status-active {
+  color: var(--admin-success);
+  background: var(--admin-success-bg);
+}
+
+.admin-badge.status-inactive {
+  color: var(--admin-text-faint);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* ============================================
+   TABLE ACTION BUTTONS
+   ============================================ */
+.admin-table-actions-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.admin-table-action-btn[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: var(--admin-panel-raised);
+  border: 1px solid var(--admin-border-strong);
+  color: var(--admin-text);
+  font-family: var(--font-sans);
+  font-size: 10.5px;
+  padding: 0.3rem 0.55rem;
+  white-space: nowrap;
+  border-radius: var(--admin-radius);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms var(--ease-tag), transform 200ms var(--ease-tag);
+  z-index: 20;
+}
+
+.admin-table-action-btn[data-tooltip]:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ============================================
+   SKELETON LOADING STATE
+   ============================================ */
+.admin-skeleton-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.admin-skeleton-row {
+  height: 54px;
+  border-radius: var(--admin-radius);
+  background: linear-gradient(90deg,
+      var(--admin-panel-raised) 0%,
+      rgba(255, 255, 255, 0.07) 50%,
+      var(--admin-panel-raised) 100%);
+  background-size: 200% 100%;
+  animation: adminShimmer 1.6s ease-in-out infinite;
+}
+
+@keyframes adminShimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ============================================
+   EMPTY STATE
+   ============================================ */
+.admin-empty-state:not([hidden]) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 1.5rem;
+  animation: adminFadeIn 500ms var(--ease-tag) both;
+}
+
+.admin-empty-illustration {
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed var(--admin-border-strong);
+  border-radius: 50%;
+  color: var(--admin-text-faint);
+  margin-bottom: 1.5rem;
+}
+
+.admin-empty-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  letter-spacing: 0.01em;
+  color: var(--admin-text);
+}
+
+.admin-empty-sub {
+  margin-top: 0.4rem;
+  margin-bottom: 1.5rem;
+  font-size: 13px;
+  color: var(--admin-text-dim);
+  font-weight: 300;
+}
+
+/* ============================================
+   PAGINATION
+   ============================================ */
+.admin-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--admin-border);
+}
+
+.admin-rows-per-page {
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+  color: var(--admin-text-faint);
+  white-space: nowrap;
+}
+
+.admin-pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.admin-page-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  height: 30px;
+  padding: 0 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--admin-text-dim);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius);
+  transition: all 250ms var(--ease-tag);
+}
+
+.admin-page-btn:hover:not(:disabled) {
+  color: var(--admin-text);
+  border-color: var(--admin-border-strong);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.admin-page-btn.active {
+  background: var(--admin-text);
+  color: var(--tag-black);
+  border-color: var(--admin-text);
+}
+
+.admin-page-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.admin-page-ellipsis {
+  color: var(--admin-text-faint);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  padding: 0 0.25rem;
+}
+
+/* ============================================
+   CUSTOMER DETAIL PANEL — slide-in overlay
+   ============================================ */
+.admin-customer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
+  z-index: 80;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 350ms var(--ease-tag);
+}
+
+.admin-customer-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.admin-customer-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 640px;
+  max-width: 100%;
+  background: var(--admin-panel);
+  border-left: 1px solid var(--admin-border);
+  overflow-y: auto;
+  z-index: 85;
+  transform: translateX(100%);
+  transition: transform 400ms var(--ease-tag);
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-customer-panel.is-open {
+  transform: translateX(0);
+}
+
+/* Panel head */
+.admin-customer-panel-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--admin-border);
+  flex-shrink: 0;
+}
+
+.admin-customer-panel-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  min-width: 0;
+}
+
+.admin-customer-panel-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--admin-panel-raised);
+  border: 1px solid var(--admin-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--admin-text-dim);
+  flex-shrink: 0;
+  text-transform: uppercase;
+}
+
+.admin-customer-panel-name {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--admin-text);
+}
+
+.admin-customer-panel-email {
+  margin-top: 0.15rem;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--admin-text-faint);
+}
+
+.admin-customer-panel-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius);
+  color: var(--admin-text-dim);
+  transition: all 250ms var(--ease-tag);
+}
+
+.admin-customer-panel-close:hover {
+  color: var(--admin-text);
+  border-color: var(--admin-border-strong);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* Panel body */
+.admin-customer-panel-body {
+  flex: 1;
+  padding: 0;
+  overflow-y: auto;
+}
+
+/* Panel sections */
+.admin-customer-section {
+  padding: 1.35rem 1.5rem;
+  border-bottom: 1px solid var(--admin-border);
+}
+
+.admin-customer-section:last-child {
+  border-bottom: none;
+}
+
+.admin-customer-section-title {
+  font-family: var(--font-sans);
+  font-size: 10.5px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--admin-text-faint);
+  margin-bottom: 0.85rem;
+}
+
+/* Customer info grid */
+.admin-customer-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.admin-customer-info-block-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--admin-text-faint);
+  margin-bottom: 0.5rem;
+}
+
+.admin-customer-info-block p {
+  font-size: 12.5px;
+  color: var(--admin-text);
+  line-height: 1.5;
+}
+
+.admin-customer-info-block p+p {
+  margin-top: 0.15rem;
+}
+
+.admin-customer-info-block .admin-mono {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+}
+
+/* Customer stats mini grid */
+.admin-customer-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.85rem;
+}
+
+.admin-customer-stat-block {
+  background: var(--admin-panel-raised);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius);
+  padding: 0.85rem 1rem;
+  text-align: center;
+}
+
+.admin-customer-stat-value {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--admin-text);
+}
+
+.admin-customer-stat-label {
+  margin-top: 0.25rem;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--admin-text-faint);
+}
+
+/* Panel recent orders table */
+.admin-customer-orders-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-customer-orders-table thead th {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--admin-text-faint);
+  font-weight: 500;
+  text-align: left;
+  padding: 0 0 0.6rem;
+  border-bottom: 1px solid var(--admin-border);
+}
+
+.admin-customer-orders-table thead th:not(:first-child) {
+  text-align: right;
+}
+
+.admin-customer-orders-table tbody td {
+  font-size: 12.5px;
+  color: var(--admin-text);
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--admin-border);
+  vertical-align: middle;
+}
+
+.admin-customer-orders-table tbody td:not(:first-child) {
+  text-align: right;
+}
+
+.admin-customer-orders-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.admin-customer-order-id {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--admin-text);
+  letter-spacing: 0.02em;
+}
+
+.admin-customer-order-date {
+  font-size: 12px;
+  color: var(--admin-text-dim);
+}
+
+.admin-customer-order-total {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--admin-text);
+}
+
+/* Panel no orders */
+.admin-customer-no-orders {
+  text-align: center;
+  padding: 1.5rem 0;
+  font-size: 12.5px;
+  color: var(--admin-text-faint);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 900px) {
+  .admin-select-wrap {
+    flex: 1 1 140px;
+  }
+
+  .admin-select {
+    width: 100%;
+  }
+}
+
+/* Convert the customers table into stacked cards below 720px */
+@media (max-width: 720px) {
+  .admin-customers-table-wrap {
+    overflow: visible;
+  }
+
+  .admin-customers-table {
+    min-width: 0;
+  }
+
+  .admin-customers-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .admin-customers-table,
+  .admin-customers-table tbody,
+  .admin-customers-table tr,
+  .admin-customers-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .admin-customers-table tr {
+    position: relative;
+    background: var(--admin-panel-raised);
+    border: 1px solid var(--admin-border);
+    border-radius: var(--admin-radius);
+    padding: 2.4rem 0.9rem 0.9rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .admin-customers-table td {
+    border-bottom: none;
+    padding: 0.35rem 0;
+    white-space: normal;
+  }
+
+  .admin-customers-table td[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 9.5px;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    color: var(--admin-text-faint);
+    margin-bottom: 0.2rem;
+  }
+
+  .admin-customers-table td:first-child {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.9rem;
+    width: auto;
+    padding: 0;
+  }
+
+  .admin-customers-table td:first-child::before {
+    display: none;
+  }
+
+  .admin-customer-cell {
+    flex-wrap: wrap;
+  }
+
+  .admin-table-actions-cell {
+    margin-top: 0.4rem;
+  }
+}
+
+/* Toolbar panel + filter search (shared with products) */
+.admin-toolbar-panel {
+  padding: 1.1rem 1.5rem;
+}
+
+.admin-filter-search {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex: 1 1 220px;
+  min-width: 200px;
+  padding: 0.65rem 0.95rem;
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--admin-text-faint);
+  transition: all 300ms var(--ease-tag);
+}
+
+.admin-filter-search:focus-within {
+  border-color: var(--admin-border-strong);
+  background: var(--admin-panel-raised);
+  color: var(--admin-text);
+}
+
+.admin-filter-search svg {
+  flex-shrink: 0;
+}
+
+.admin-filter-search input {
+  width: 100%;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--admin-text);
+}
+
+.admin-filter-search input::placeholder {
+  color: var(--admin-text-faint);
+}
+  .admin-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .admin-pagination {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Customer detail panel — full width on mobile */
+  .admin-customer-panel {
+    width: 100%;
+  }
+
+  .admin-customer-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-customer-stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+  }
+
+  .admin-customer-stat-block {
+    padding: 0.65rem 0.5rem;
+  }
+
+  .admin-customer-stat-value {
+    font-size: 15px;
+  }
+
+  .admin-customer-orders-table thead th,
+  .admin-customer-orders-table tbody td {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-customer-stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+
+  .admin-customers-table tbody tr,
+  .admin-empty-state,
+  .admin-skeleton-row {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .admin-customer-overlay,
+  .admin-customer-panel {
+    transition: none !important;
+  }
+}
+
+
+/* ============================================
+   Customers Custom Selects
+   ============================================ */
+
+/* Unified Custom Select Styles */
+.admin-select,
+.admin-select-custom {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  min-height: 42px;
+  padding: 0.7rem 2.6rem 0.7rem 1rem;
+  background: #111111;
+  color: #f5f0e8;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 3px; /* Matched to --admin-radius */
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: all 200ms var(--ease-tag);
+}
+
+.admin-select:hover,
+.admin-select-custom:hover {
+  background: #171717;
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+.admin-select:focus,
+.admin-select-custom:focus {
+  outline: none;
+  background: #151515;
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.05);
+}
+
+.admin-select option,
+.admin-select-custom option {
+  background: #111111;
+  color: #f5f0e8;
+}
+
+/* Compact version (pagination) */
+.admin-select--compact {
+  width: auto !important;
+  min-width: 64px !important;
+  min-height: 32px !important;
+  padding: 0.4rem 1.8rem 0.4rem 0.7rem !important;
+  font-size: 11px !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+}
+
+.admin-rows-per-page {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}

@@ -1,0 +1,145 @@
+/* ============================================
+   TAG ADMIN — Analytics Page
+   Extends the dashboard system. No new colors/fonts.
+   ============================================ */
+
+/* --- Date Range Tabs --- */
+.admin-analytics-range {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 1.25rem;
+}
+
+/* --- Analytics Charts Grid (2-col override) --- */
+.admin-analytics-charts {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.admin-analytics-charts .admin-panel {
+  grid-column: span 1 !important;
+}
+
+.analytics-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  min-height: 150px;
+  height: 150px;
+  padding: 0.75rem 0.25rem 0;
+}
+
+.analytics-bar-item {
+  display: flex;
+  flex: 1 1 0;
+  min-width: 34px;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.35rem;
+}
+
+.analytics-bar {
+  width: 100%;
+  min-height: 1px;
+  border-radius: 3px 3px 0 0;
+  transition: height 250ms ease;
+}
+
+.analytics-bar-item small {
+  color: var(--admin-text-faint);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.analytics-empty-state,
+.admin-analytics-status {
+  color: var(--admin-text-dim);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.admin-analytics-status {
+  border: 1px solid var(--admin-border);
+  margin-bottom: 1rem;
+}
+
+.admin-analytics-status--error {
+  color: #fca5a5;
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+.admin-analytics-status--empty {
+  color: var(--admin-text-dim);
+}
+
+.is-hidden {
+  display: none !important;
+}
+
+/* --- Top Products Table --- */
+.admin-top-products-table {
+  min-width: unset;
+}
+
+.admin-top-products-table thead th {
+  padding: 0 0.75rem 0.85rem;
+}
+
+.admin-top-products-table thead th:first-child {
+  width: 36px;
+  text-align: center;
+}
+
+.admin-top-products-table tbody td {
+  padding: 0.75rem;
+}
+
+.admin-top-products-table tbody td:first-child {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--admin-text-faint);
+}
+
+/* --- Analytics content must remain visible even when the shared dashboard
+   intersection observer is not installed on this page. --- */
+.admin-analytics-charts .admin-panel {
+  opacity: 1;
+  transform: none;
+}
+
+/* The Analytics renderer uses .admin-hbar-bar. Keep the fill positioned
+   inside its 8px track instead of letting absolute positioning escape to the
+   page and create a giant overlay. */
+.admin-hbar-bar {
+  position: relative;
+  flex: 1;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--admin-radius-pill);
+  overflow: hidden;
+}
+
+@media (max-width: 1200px) {
+  .admin-analytics-charts { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .admin-analytics-range { justify-content: center; }
+  .admin-analytics-range .admin-tabs {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .admin-analytics-range .admin-tabs::-webkit-scrollbar { display: none; }
+  .admin-vbar-chart { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .admin-vbar-chart::-webkit-scrollbar { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .analytics-bar { transition: none; }
+}

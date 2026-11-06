@@ -1,0 +1,846 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add Product — TAG Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=block"
+    rel="stylesheet" />
+  <!-- Shared TAG brand design system: colors, fonts, loader, cursor, buttons -->
+  <link rel="stylesheet" href="../css/style.css?v=7" />
+  <!-- Admin dashboard layout & components (unchanged) -->
+  <link rel="stylesheet" href="css/dashboard.css?v=5" />
+  <!-- Products page system (unchanged) — provides badges, selects, checkboxes, toast -->
+  <link rel="stylesheet" href="css/products.css?v=5" />
+  <!-- Add / Edit Product page — extends the system above, adds no new colors/fonts -->
+  <link rel="stylesheet" href="css/product-form.css?v=5" />
+</head>
+
+<body class="admin-body">
+
+  <!-- ============================================
+       LOADER (reused from storefront)
+       ============================================ -->
+  <div class="loader" id="loader">
+    <div class="loader-mark">
+      <img src="../assets/images/logo-white.png" alt="TAG Logo">
+    </div>
+    <div class="loader-line"><span></span></div>
+  </div>
+
+  <!-- ============================================
+       CUSTOM CURSOR (reused from storefront)
+       ============================================ -->
+  <div class="cursor-ring" id="cursorRing">
+    <div class="cursor-ring-inner"></div>
+  </div>
+  <div class="cursor-dot" id="cursorDot">
+    <div class="cursor-dot-inner"></div>
+  </div>
+
+  <!-- ============================================
+       SIDEBAR (reused from Dashboard — Products active)
+       ============================================ -->
+  <div class="admin-sidebar-overlay" id="adminSidebarOverlay"></div>
+
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="admin-sidebar-head">
+      <a href="index.html" class="admin-sidebar-logo">
+        <img src="../assets/images/tag-hero-mark.png" alt="TAG" />
+        <span class="admin-sidebar-logo-text">TAG Admin</span>
+      </a>
+      <button class="admin-sidebar-collapse-btn" id="sidebarCollapseBtn" aria-label="Collapse sidebar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6" />
+        </svg>
+      </button>
+    </div>
+
+    <nav class="admin-nav" aria-label="Dashboard navigation">
+      <p class="admin-nav-section-label">General</p>
+
+      <a href="index.html" class="admin-nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+          stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="9" />
+          <rect x="14" y="3" width="7" height="5" />
+          <rect x="14" y="12" width="7" height="9" />
+          <rect x="3" y="16" width="7" height="5" />
+        </svg>
+        <span class="admin-nav-label">Dashboard</span>
+        <span class="admin-nav-tooltip">Dashboard</span>
+      </a>
+
+      <a href="products.html" class="admin-nav-item active" aria-current="page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M16.5 9.4 7.5 4.21" />
+          <path
+            d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+          <line x1="12" y1="22.08" x2="12" y2="12" />
+        </svg>
+        <span class="admin-nav-label">Products</span>
+        <span class="admin-nav-tooltip">Products</span>
+      </a>
+
+            <p class="admin-nav-section-label">Sales</p>
+
+      <a href="orders.html" class="admin-nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <path d="M16 10a4 4 0 0 1-8 0" />
+        </svg>
+        <span class="admin-nav-label">Orders</span>
+        <span class="admin-nav-tooltip">Orders</span>
+      </a>
+
+      <a href="customers.html" class="admin-nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+          <circle cx="9" cy="7" r="4" />
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+          <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+        </svg>
+        <span class="admin-nav-label">Customers</span>
+        <span class="admin-nav-tooltip">Customers</span>
+      </a>
+
+      <a href="analytics.html" class="admin-nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+          stroke-linejoin="round">
+          <line x1="18" y1="20" x2="18" y2="10" />
+          <line x1="12" y1="20" x2="12" y2="4" />
+          <line x1="6" y1="20" x2="6" y2="14" />
+        </svg>
+        <span class="admin-nav-label">Analytics</span>
+        <span class="admin-nav-tooltip">Analytics</span>
+      </a>
+
+      <div class="admin-nav-divider"></div>
+
+      <a href="settings.html" class="admin-nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+          stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3" />
+          <path
+            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+        </svg>
+        <span class="admin-nav-label">Settings</span>
+        <span class="admin-nav-tooltip">Settings</span>
+      </a>
+    </nav>
+
+    <div class="admin-sidebar-foot">
+      <a href="admin-account.html" class="admin-sidebar-user">
+        <div class="admin-sidebar-user-avatar">A</div>
+        <div class="admin-sidebar-user-info">
+          <p class="admin-sidebar-user-name">Admin</p>
+          <p class="admin-sidebar-user-email">admin@tag.com</p>
+        </div>
+      </a>
+      <a href="../index.html" class="admin-sidebar-foot-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+          <polyline points="16 17 21 12 16 7" />
+          <line x1="21" y1="12" x2="9" y2="12" />
+        </svg>
+        <span class="admin-sidebar-foot-text">Logout</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ============================================
+       MAIN
+       ============================================ -->
+  <div class="admin-main">
+
+    <!-- TOPBAR (reused from Dashboard) -->
+    <header class="admin-topbar" id="adminTopbar">
+      <div class="admin-topbar-left">
+        <button class="admin-mobile-menu-btn admin-icon-btn" id="adminMobileMenuBtn" aria-label="Open menu">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
+        </button>
+
+        <h1 class="admin-page-title" id="adminPageTitle">Products</h1>
+
+        <div class="admin-search-wrap">
+          <label class="admin-search">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+            <input type="text" id="adminSearchInput" placeholder="Search orders, products, customers…"
+              autocomplete="off" />
+          </label>
+        </div>
+      </div>
+
+      <div class="admin-topbar-right">
+        <button class="admin-icon-btn" aria-label="Notifications">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" />
+            <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+          </svg>
+          <span class="admin-notif-badge"></span>
+        </button>
+
+        <div class="admin-profile">
+          <div class="admin-avatar">A</div>
+          <div class="admin-profile-info">
+            <span class="admin-profile-name">Admin</span>
+            <span class="admin-profile-role">Store Owner</span>
+          </div>
+          <svg class="admin-profile-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTENT -->
+    <main class="admin-content">
+
+      <!-- ============================================
+           PAGE HEADER
+           ============================================ -->
+      <section class="admin-welcome admin-form-header">
+        <div>
+          <a href="products.html" class="admin-form-breadcrumb">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+            Products
+          </a>
+          <h2 class="admin-welcome-title" id="formPageTitle">Add New Product</h2>
+          <p class="admin-welcome-sub" id="formPageSub">Create a new product for your store.</p>
+        </div>
+        <div class="admin-form-header-actions">
+          <button class="btn-form btn-form--ghost" type="button" id="cancelProductBtn" data-action="cancel">
+            Cancel
+          </button>
+          <button class="btn-form btn-form--outline" type="button" id="saveDraftBtn" data-action="save-draft">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+              <polyline points="17 21 17 13 7 13 7 21" />
+              <polyline points="7 3 7 8 15 8" />
+            </svg>
+            Save Draft
+          </button>
+          <button class="btn-white btn-form" type="button" id="publishProductBtn" data-action="publish">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+            Publish Product
+          </button>
+        </div>
+      </section>
+
+      <!-- ============================================
+           FORM — two-column layout
+           ============================================ -->
+      <form class="admin-product-form" id="productForm" novalidate>
+        <input type="hidden" id="productId" name="productId" value="" />
+        <input type="hidden" id="productStatus" name="status" value="draft" />
+
+        <div class="admin-form-grid">
+
+          <!-- ============================================
+               LEFT COLUMN — main product data
+               ============================================ -->
+          <div class="admin-form-col admin-form-col--main">
+
+            <!-- ---------------- Product Information ---------------- -->
+            <section class="admin-panel admin-form-panel" id="panelProductInfo">
+              <div class="admin-panel-head admin-form-panel-head">
+                <div>
+                  <p class="admin-panel-eyebrow">Details</p>
+                  <h2 class="admin-section-title">Product Information</h2>
+                </div>
+              </div>
+
+              <div class="admin-form-body">
+
+                <div class="admin-form-row">
+                  <div class="admin-field admin-field--required">
+                    <label class="admin-label" for="productName">Product Name <span
+                        class="admin-required-mark">*</span></label>
+                    <input class="admin-input" type="text" id="productName" name="productName"
+                      placeholder="e.g. Oversized Heavyweight Tee" required minlength="2" maxlength="120"
+                      autocomplete="off" />
+                    <p class="admin-helper-text">Shown on the storefront, listings and receipts.</p>
+                    <p class="admin-field-error" id="productNameError">Product name is required.</p>
+                  </div>
+                </div>
+
+                <div class="admin-form-row">
+                  <div class="admin-field">
+                    <label class="admin-label" for="productShortDescription">Short Description</label>
+                    <textarea class="admin-textarea admin-textarea--sm" id="productShortDescription"
+                      name="shortDescription" rows="2" maxlength="160"
+                      placeholder="A one-line hook shown on product cards…"></textarea>
+                    <p class="admin-helper-text">Used in grid cards &amp; search results. <span
+                        id="shortDescCount">0</span>/160</p>
+                  </div>
+                </div>
+
+                <div class="admin-form-row">
+                  <div class="admin-field">
+                    <label class="admin-label" for="productFullDescription">Full Description</label>
+                    <textarea class="admin-textarea admin-textarea--lg" id="productFullDescription"
+                      name="fullDescription" rows="8"
+                      placeholder="Tell the full story — fabric, fit, construction, care…"></textarea>
+                    <p class="admin-helper-text">Supports plain text. Rich formatting arrives in a later phase.</p>
+                  </div>
+                </div>
+
+                <div class="admin-form-row admin-form-row--split">
+                  <div class="admin-field admin-field--required">
+                    <label class="admin-label" for="productCategory">Category <span
+                        class="admin-required-mark">*</span></label>
+                    <div class="admin-select-wrap admin-select-wrap--full">
+                      <select class="admin-select admin-select--full" id="productCategory" name="category" required>
+                        <option value="" selected disabled>Select category…</option>
+                        <option value="T-Shirts">T-Shirts</option>
+                        <option value="Hoodies">Hoodies</option>
+                        <option value="Shirts">Shirts</option>
+                        <option value="Pants">Pants</option>
+                        <option value="Shoes">Shoes</option>
+                        <option value="Accessories">Accessories</option>
+                      </select>
+                      <svg class="admin-select-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9" />
+                      </svg>
+                    </div>
+                    <p class="admin-field-error" id="productCategoryError">Please select a category.</p>
+                  </div>
+
+                  <div class="admin-field">
+                    <label class="admin-label" for="productSubCategory">Sub Category</label>
+                    <div class="admin-select-wrap admin-select-wrap--full">
+                      <select class="admin-select admin-select--full" id="productSubCategory" name="subCategory">
+                        <option value="" selected>None</option>
+                        <option value="Crewneck">Crewneck</option>
+                        <option value="V-Neck">V-Neck</option>
+                        <option value="Zip-Up">Zip-Up</option>
+                        <option value="Cargo">Cargo</option>
+                        <option value="Sneakers">Sneakers</option>
+                        <option value="Headwear">Headwear</option>
+                      </select>
+                      <svg class="admin-select-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="admin-form-row admin-form-row--split">
+                  <div class="admin-field">
+                    <label class="admin-label" for="productBrand">Brand</label>
+                    <input class="admin-input" type="text" id="productBrand" name="brand" placeholder="TAG"
+                      autocomplete="off" />
+                  </div>
+
+                  <div class="admin-field admin-field--required">
+                    <label class="admin-label" for="productSKU">SKU <span class="admin-required-mark">*</span></label>
+                    <input class="admin-input admin-input--mono" type="text" id="productSKU" name="sku"
+                      placeholder="TAG-TS-0142" required autocomplete="off" />
+                    <p class="admin-field-error" id="productSKUError">SKU is required.</p>
+                  </div>
+                </div>
+
+                <div class="admin-form-row admin-form-row--split">
+                  <div class="admin-field">
+                    <label class="admin-label" for="productBarcode">Barcode</label>
+                    <input class="admin-input admin-input--mono" type="text" id="productBarcode" name="barcode"
+                      placeholder="ISBN, UPC, GTIN…" autocomplete="off" />
+                  </div>
+
+                  <div class="admin-field">
+                    <label class="admin-label" for="productTagsInput">Tags</label>
+                    <div class="admin-tag-input" id="productTagInput">
+                      <div class="admin-tag-list" id="productTagList" aria-live="polite"></div>
+                      <input class="admin-tag-input-field" type="text" id="productTagsInput"
+                        placeholder="Add a tag and press Enter…" autocomplete="off" />
+                    </div>
+                    <input type="hidden" id="productTags" name="tags" value="" />
+                    <p class="admin-helper-text">Press Enter or comma to add. Used for storefront filtering.</p>
+                  </div>
+                </div>
+
+              </div>
+            </section>
+
+            <!-- ---------------- Pricing ---------------- -->
+            <section class="admin-panel admin-form-panel" id="panelPricing">
+              <div class="admin-panel-head admin-form-panel-head">
+                <div>
+                  <p class="admin-panel-eyebrow">Money</p>
+                  <h2 class="admin-section-title">Pricing</h2>
+                </div>
+                <span class="admin-discount-badge" id="discountBadge" hidden>25% OFF</span>
+              </div>
+
+              <div class="admin-form-body">
+                <div class="admin-form-row admin-form-row--triple">
+                  <div class="admin-field admin-field--required">
+                    <label class="admin-label" for="regularPrice">Regular Price <span
+                        class="admin-required-mark">*</span></label>
+                    <div class="admin-input-prefix">
+                      <span class="admin-input-prefix-mark">EGP</span>
+                      <input class="admin-input admin-input--currency" type="number" id="regularPrice"
+                        name="regularPrice" placeholder="0.00" min="0" step="0.01" required />
+                    </div>
+                    <p class="admin-field-error" id="regularPriceError">Regular price is required.</p>
+                  </div>
+
+                  <div class="admin-field">
+                    <label class="admin-label" for="salePrice">Sale Price</label>
+                    <div class="admin-input-prefix">
+                      <span class="admin-input-prefix-mark">EGP</span>
+                      <input class="admin-input admin-input--currency" type="number" id="salePrice" name="salePrice"
+                        placeholder="0.00" min="0" step="0.01" />
+                    </div>
+                    <p class="admin-helper-text">Leave empty to sell at regular price.</p>
+                  </div>
+
+                  <div class="admin-field">
+                    <label class="admin-label" for="costPrice">Cost Price</label>
+                    <div class="admin-input-prefix">
+                      <span class="admin-input-prefix-mark">EGP</span>
+                      <input class="admin-input admin-input--currency" type="number" id="costPrice" name="costPrice"
+                        placeholder="0.00" min="0" step="0.01" />
+                    </div>
+                    <p class="admin-helper-text">Internal only — never shown to customers.</p>
+                  </div>
+                </div>
+
+                <div class="admin-margin-strip" id="marginStrip" hidden>
+                  <span class="admin-margin-strip-label">Profit margin</span>
+                  <span class="admin-margin-strip-value" id="marginStripValue">—</span>
+                </div>
+              </div>
+            </section>
+
+            <!-- ---------------- Product Images ---------------- -->
+            <section class="admin-panel admin-form-panel" id="panelImages">
+              <div class="admin-panel-head admin-form-panel-head">
+                <div>
+                  <p class="admin-panel-eyebrow">Media</p>
+                  <h2 class="admin-section-title">Product Images</h2>
+                </div>
+                <span class="admin-form-panel-hint" id="imageCountHint">0 images</span>
+              </div>
+
+              <div class="admin-form-body">
+                <label class="admin-uploader" id="imageDropzone" for="productImageInput">
+                  <input type="file" id="productImageInput" name="images" accept="image/*" multiple hidden />
+                  <div class="admin-uploader-icon">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                      <polyline points="17 8 12 3 7 8" />
+                      <line x1="12" y1="3" x2="12" y2="15" />
+                    </svg>
+                  </div>
+                  <p class="admin-uploader-title">Drag &amp; drop images here</p>
+                  <p class="admin-uploader-sub">or click to browse — PNG, JPG, WEBP up to 10MB each</p>
+                  <span class="btn-outline admin-uploader-btn" id="imageUploadBtn">Upload Images</span>
+                </label>
+
+                <div class="admin-image-grid" id="imagePreviewGrid" aria-live="polite"></div>
+                <p class="admin-helper-text admin-image-empty-hint" id="imageEmptyHint">No images yet — the first
+                  image you add becomes the main image.</p>
+              </div>
+            </section>
+
+            <!-- ---------------- Variants ---------------- -->
+            <section class="admin-panel admin-form-panel" id="panelVariants">
+              <div class="admin-panel-head admin-form-panel-head">
+                <div>
+                  <p class="admin-panel-eyebrow">Options</p>
+                  <h2 class="admin-section-title">Variants</h2>
+                </div>
+              </div>
+
+              <div class="admin-form-body">
+
+                <div class="admin-variant-group">
+                  <div class="admin-variant-group-head">
+                    <label class="admin-label admin-label--block">Colors</label>
+                    <button class="admin-variant-add-btn" type="button" id="addCustomColorBtn">
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19" />
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                      </svg>
+                      Add Color
+                    </button>
+                  </div>
+                  <div class="admin-chip-row" id="colorChipRow" role="group" aria-label="Available colors">
+                    <button type="button" class="admin-color-chip" data-color="Black" data-hex="#000000">
+                      <span class="admin-color-chip-swatch" style="background:#000000"></span>Black
+                    </button>
+                    <button type="button" class="admin-color-chip" data-color="White" data-hex="#ffffff">
+                      <span class="admin-color-chip-swatch" style="background:#ffffff"></span>White
+                    </button>
+                    <button type="button" class="admin-color-chip" data-color="Grey" data-hex="#8a8a8a">
+                      <span class="admin-color-chip-swatch" style="background:#8a8a8a"></span>Grey
+                    </button>
+                    <button type="button" class="admin-color-chip" data-color="Brown" data-hex="#6b4a34">
+                      <span class="admin-color-chip-swatch" style="background:#6b4a34"></span>Brown
+                    </button>
+                    <button type="button" class="admin-color-chip" data-color="Navy" data-hex="#1f2937">
+                      <span class="admin-color-chip-swatch" style="background:#1f2937"></span>Navy
+                    </button>
+                    <button type="button" class="admin-color-chip" data-color="Beige" data-hex="#d8c8a8">
+                      <span class="admin-color-chip-swatch" style="background:#d8c8a8"></span>Beige
+                    </button>
+                  </div>
+                  <div class="admin-custom-color-row" id="customColorRow" hidden>
+                    <input type="text" class="admin-input admin-input--sm" id="customColorName"
+                      placeholder="Color name" autocomplete="off" />
+                    <input type="color" class="admin-color-picker" id="customColorHex" value="#666666" />
+                    <button type="button" class="btn-form btn-form--outline btn-form--sm" id="confirmCustomColorBtn">Add</button>
+                  </div>
+                  <input type="hidden" id="selectedColors" name="colors" value="" />
+                </div>
+
+                <div class="admin-variant-group">
+                  <div class="admin-variant-group-head">
+                    <label class="admin-label admin-label--block">Sizes</label>
+                  </div>
+                  <div class="admin-chip-row" id="sizeChipRow" role="group" aria-label="Available sizes">
+                    <button type="button" class="admin-size-chip" data-size="XS">XS</button>
+                    <button type="button" class="admin-size-chip" data-size="S">S</button>
+                    <button type="button" class="admin-size-chip" data-size="M">M</button>
+                    <button type="button" class="admin-size-chip" data-size="L">L</button>
+                    <button type="button" class="admin-size-chip" data-size="XL">XL</button>
+                    <button type="button" class="admin-size-chip" data-size="XXL">XXL</button>
+                  </div>
+                  <input type="hidden" id="selectedSizes" name="sizes" value="" />
+                </div>
+
+                <div class="admin-variant-group">
+                  <div class="admin-variant-group-head">
+                    <label class="admin-label admin-label--block">Stock per Size</label>
+                  </div>
+                  <div class="admin-stock-table-wrap">
+                    <table class="admin-table admin-stock-table" id="sizeStockTable">
+                      <thead>
+                        <tr>
+                          <th>Size</th>
+                          <th>Stock Quantity</th>
+                        </tr>
+                      </thead>
+                      <tbody id="sizeStockBody">
+                        <!-- Rows injected per selected size by product-form.js -->
+                      </tbody>
+                    </table>
+                    <p class="admin-helper-text admin-stock-empty-hint" id="stockEmptyHint">Select a size above to
+                      set its stock quantity.</p>
+                  </div>
+                </div>
+
+              </div>
+            </section>
+
+            <!-- ---------------- Shipping ---------------- -->
+            <section class="admin-panel admin-form-panel" id="panelShipping">
+              <div class="admin-panel-head admin-form-panel-head">
+                <div>
+                  <p class="admin-panel-eyebrow">Fulfillment</p>
+                  <h2 class="admin-section-title">Shipping</h2>
+                </div>
+              </div>
+
+              <div class="admin-form-body">
+                <div class="admin-form-row admin-form-row--quad">
+                  <div class="admin-field">
+                    <label class="admin-label" for="shippingWeight">Weight (kg)</label>
+                    <input class="admin-input" type="number" id="shippingWeight" name="weight" placeholder="0.00"
+                      min="0" step="0.01" />
+                  </div>
+                  <div class="admin-field">
+                    <label class="admin-label" for="shippingLength">Length (cm)</label>
+                    <input class="admin-input" type="number" id="shippingLength" name="length" placeholder="0"
+                      min="0" step="0.1" />
+                  </div>
+                  <div class="admin-field">
+                    <label class="admin-label" for="shippingWidth">Width (cm)</label>
+                    <input class="admin-input" type="number" id="shippingWidth" name="width" placeholder="0" min="0"
+                      step="0.1" />
+                  </div>
+                  <div class="admin-field">
+                    <label class="admin-label" for="shippingHeight">Height (cm)</label>
+                    <input class="admin-input" type="number" id="shippingHeight" name="height" placeholder="0"
+                      min="0" step="0.1" />
+                  </div>
+                </div>
+
+                <div class="admin-form-row">
+                  <div class="admin-field">
+                    <label class="admin-label" for="shippingClass">Shipping Class</label>
+                    <div class="admin-select-wrap admin-select-wrap--full">
+                      <select class="admin-select admin-select--full" id="shippingClass" name="shippingClass">
+                        <option value="standard" selected>Standard</option>
+                        <option value="express">Express</option>
+                        <option value="oversized">Oversized / Freight</option>
+                        <option value="free">Free Shipping</option>
+                      </select>
+                      <svg class="admin-select-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- ---------------- SEO ---------------- -->
+            <section class="admin-panel admin-form-panel" id="panelSEO">
+              <div class="admin-panel-head admin-form-panel-head">
+                <div>
+                  <p class="admin-panel-eyebrow">Discovery</p>
+                  <h2 class="admin-section-title">Search Engine Optimization</h2>
+                </div>
+              </div>
+
+              <div class="admin-form-body">
+                <div class="admin-form-row">
+                  <div class="admin-field">
+                    <label class="admin-label" for="seoTitle">SEO Title</label>
+                    <input class="admin-input" type="text" id="seoTitle" name="seoTitle" maxlength="60"
+                      placeholder="Defaults to product name" autocomplete="off" />
+                    <p class="admin-helper-text"><span id="seoTitleCount">0</span>/60 characters</p>
+                  </div>
+                </div>
+
+                <div class="admin-form-row">
+                  <div class="admin-field">
+                    <label class="admin-label" for="metaDescription">Meta Description</label>
+                    <textarea class="admin-textarea admin-textarea--sm" id="metaDescription" name="metaDescription"
+                      rows="3" maxlength="160" placeholder="A concise summary shown in search results…"></textarea>
+                    <p class="admin-helper-text"><span id="metaDescCount">0</span>/160 characters</p>
+                  </div>
+                </div>
+
+                <div class="admin-form-row">
+                  <div class="admin-field">
+                    <label class="admin-label" for="productSlug">URL Slug</label>
+                    <div class="admin-input-prefix admin-input-prefix--slug">
+                      <span class="admin-input-prefix-mark">/shop/</span>
+                      <input class="admin-input admin-input--mono" type="text" id="productSlug" name="slug"
+                        placeholder="oversized-heavyweight-tee" autocomplete="off" />
+                    </div>
+                    <p class="admin-helper-text">Auto-generated from the product name — edit anytime.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+          </div>
+
+          <!-- ============================================
+               RIGHT COLUMN — publishing, preview, inventory
+               ============================================ -->
+          <div class="admin-form-col admin-form-col--side">
+
+            <!-- ---------------- Publishing ---------------- -->
+            <section class="admin-panel admin-form-panel" id="panelPublishing">
+              <div class="admin-panel-head admin-form-panel-head">
+                <div>
+                  <p class="admin-panel-eyebrow">Status</p>
+                  <h2 class="admin-section-title">Publishing</h2>
+                </div>
+              </div>
+
+              <div class="admin-form-body">
+                <div class="admin-form-row">
+                  <div class="admin-field">
+                    <label class="admin-label" for="productStatusSelect">Status</label>
+                    <div class="admin-select-wrap admin-select-wrap--full">
+                      <select class="admin-select admin-select--full" id="productStatusSelect" name="statusSelect">
+                        <option value="draft" selected>Draft</option>
+                        <option value="active">Published</option>
+                        <option value="hidden">Hidden</option>
+                      </select>
+                      <svg class="admin-select-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="admin-toggle-row">
+                  <label class="admin-toggle">
+                    <input type="checkbox" id="visibleInStore" name="visibleInStore" checked />
+                    <span class="admin-toggle-track"><span class="admin-toggle-thumb"></span></span>
+                  </label>
+                  <div>
+                    <p class="admin-toggle-label">Visible in store</p>
+                    <p class="admin-helper-text admin-helper-text--tight">Shows on the storefront when published.</p>
+                  </div>
+                </div>
+
+                <div class="admin-toggle-row">
+                  <label class="admin-toggle">
+                    <input type="checkbox" id="featuredProduct" name="featuredProduct" />
+                    <span class="admin-toggle-track"><span class="admin-toggle-thumb"></span></span>
+                  </label>
+                  <div>
+                    <p class="admin-toggle-label">Featured product</p>
+                    <p class="admin-helper-text admin-helper-text--tight">Highlight on the homepage &amp; collections.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- ---------------- Preview ---------------- -->
+            <section class="admin-panel admin-form-panel" id="panelPreview">
+              <div class="admin-panel-head admin-form-panel-head">
+                <div>
+                  <p class="admin-panel-eyebrow">Live</p>
+                  <h2 class="admin-section-title">Preview</h2>
+                </div>
+              </div>
+
+              <div class="admin-form-body">
+                <div class="admin-preview-card" id="previewCard">
+                  <div class="admin-preview-media">
+                    <img class="admin-preview-image" id="previewImage" src="" alt="" hidden />
+                    <div class="admin-preview-media-placeholder" id="previewImagePlaceholder">
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="1" />
+                        <circle cx="8.5" cy="8.5" r="1.5" />
+                        <polyline points="21 15 16 10 5 21" />
+                      </svg>
+                    </div>
+                    <span class="admin-preview-discount" id="previewDiscount" hidden>25% OFF</span>
+                    <span class="admin-badge admin-preview-status status-draft" id="previewStatusBadge">Draft</span>
+                  </div>
+                  <div class="admin-preview-body">
+                    <p class="admin-preview-category" id="previewCategory">Category</p>
+                    <p class="admin-preview-name" id="previewName">Untitled Product</p>
+                    <div class="admin-preview-price-row">
+                      <span class="admin-preview-price" id="previewPrice">0.00 EGP</span>
+                      <span class="admin-preview-price-original" id="previewOriginalPrice" hidden>0.00 EGP</span>
+                    </div>
+                  </div>
+                </div>
+                <p class="admin-helper-text">Reflects the storefront card as customers will see it.</p>
+              </div>
+            </section>
+
+            <!-- ---------------- Inventory Summary ---------------- -->
+            <section class="admin-panel admin-form-panel" id="panelInventory">
+              <div class="admin-panel-head admin-form-panel-head">
+                <div>
+                  <p class="admin-panel-eyebrow">Stock</p>
+                  <h2 class="admin-section-title">Inventory Summary</h2>
+                </div>
+              </div>
+
+              <div class="admin-form-body">
+                <div class="admin-form-row">
+                  <div class="admin-field admin-field--required">
+                    <label class="admin-label" for="stockQuantity">Stock Quantity <span
+                        class="admin-required-mark">*</span></label>
+                    <input class="admin-input" type="number" id="stockQuantity" name="stockQuantity"
+                      placeholder="0" min="0" step="1" required />
+                    <p class="admin-field-error" id="stockQuantityError">Stock quantity is required.</p>
+                  </div>
+                </div>
+
+                <div class="admin-form-row">
+                  <div class="admin-field">
+                    <label class="admin-label" for="lowStockThreshold">Low Stock Warning</label>
+                    <input class="admin-input" type="number" id="lowStockThreshold" name="lowStockThreshold"
+                      placeholder="e.g. 5" min="0" step="1" />
+                    <p class="admin-helper-text">Flags the product when stock falls at or below this number.</p>
+                  </div>
+                </div>
+
+                <div class="admin-form-row">
+                  <div class="admin-field">
+                    <label class="admin-label" for="inventorySKU">SKU</label>
+                    <input class="admin-input admin-input--mono" type="text" id="inventorySKU" name="inventorySku"
+                      placeholder="Synced from Product Information" readonly />
+                  </div>
+                </div>
+
+                <div class="admin-form-row">
+                  <div class="admin-field">
+                    <label class="admin-label" for="availabilityStatus">Availability</label>
+                    <div class="admin-select-wrap admin-select-wrap--full">
+                      <select class="admin-select admin-select--full" id="availabilityStatus" name="availability">
+                        <option value="in-stock" selected>In Stock</option>
+                        <option value="out-of-stock">Out of Stock</option>
+                        <option value="pre-order">Pre-Order</option>
+                        <option value="hidden">Hidden</option>
+                      </select>
+                      <svg class="admin-select-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="admin-inventory-flag" id="lowStockFlag" hidden>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                    <line x1="12" y1="9" x2="12" y2="13" />
+                    <line x1="12" y1="17" x2="12.01" y2="17" />
+                  </svg>
+                  Stock is at or below the low-stock threshold.
+                </div>
+              </div>
+            </section>
+
+          </div>
+
+        </div>
+      </form>
+
+    </main>
+  </div>
+
+  <!-- Toast (UI feedback only — no backend wired up yet) -->
+  <div class="admin-toast" id="adminToast"></div>
+
+  <script src="../js/api.js?v=6"></script>
+  <script src="js/dashboard.js?v=5"></script>
+  <script src="js/product-form.js?v=5"></script>
+<script src="../js/cursor.js?v=8"></script>
+<script src="js/notifications.js?v=5" defer></script>
+</body>
+
+</html>

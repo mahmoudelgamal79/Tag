@@ -1,0 +1,218 @@
+/* ============================================
+   TAG ADMIN — Settings Page
+   Built entirely on top of the design tokens and
+   components already defined in ../../css/style.css,
+   dashboard.css and product-form.css (colors, fonts,
+   easing, radii, panels, form fields, toggles, toast).
+   This file only adds the Settings-specific layout:
+   stacked single-column panels, toggle rows, panel
+   action footers, and entrance animations.
+   No new colors, fonts, or design tokens.
+   ============================================ */
+
+/* ============================================
+   SETTINGS FORM — stacked single column
+   ============================================ */
+.admin-settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 820px;
+}
+
+/* Reuse the form panel entrance pattern */
+.admin-settings-form .admin-form-panel {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: adminFormPanelIn 600ms var(--ease-tag) forwards;
+}
+
+.admin-settings-form .admin-form-panel:nth-child(1) {
+  animation-delay: 40ms;
+}
+
+.admin-settings-form .admin-form-panel:nth-child(2) {
+  animation-delay: 120ms;
+}
+
+.admin-settings-form .admin-form-panel:nth-child(3) {
+  animation-delay: 200ms;
+}
+
+.admin-settings-form .admin-form-panel:nth-child(4) {
+  animation-delay: 280ms;
+}
+
+@keyframes adminFormPanelIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-settings-form .admin-form-panel {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ============================================
+   FORM PANEL — title + hint + actions
+   ============================================ */
+.admin-form-panel-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 1.35rem;
+  flex-wrap: wrap;
+}
+
+.admin-form-panel-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  letter-spacing: 0.01em;
+  color: var(--admin-text);
+}
+
+.admin-form-panel-hint {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--admin-text-faint);
+}
+
+.admin-form-panel-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--admin-border);
+}
+
+/* ============================================
+   TOGGLE SECTION LAYOUT
+   Toggle on right, label + helper text on left
+   ============================================ */
+.admin-settings-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 0.75rem 0;
+}
+
+.admin-settings-toggle-row+.admin-settings-toggle-row {
+  border-top: 1px solid var(--admin-border);
+}
+
+.admin-settings-toggle-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+.admin-settings-toggle-info .admin-toggle-label {
+  cursor: pointer;
+}
+
+.admin-settings-toggle-info .admin-helper-text {
+  max-width: 420px;
+}
+
+/* ============================================
+   FORM ROWS — responsive split layout
+   (Ships inside a flex column so row uses CSS Grid)
+   ============================================ */
+.admin-settings-form .admin-form-row--split {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.admin-settings-form .admin-form-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 640px) {
+  .admin-settings-form .admin-form-row--split {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-settings-toggle-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.65rem;
+  }
+
+  .admin-form-panel-actions {
+    justify-content: stretch;
+  }
+
+  .admin-form-panel-actions .btn-form {
+    width: 100%;
+  }
+
+  .admin-form-panel-head {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+}
+
+
+
+/* ============================================
+   Settings Custom Selects
+   ============================================ */
+
+.admin-select-custom {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  min-height: 42px;
+  padding: 0.7rem 2.6rem 0.7rem 1rem;
+
+  background: #111111;
+  color: #f5f0e8;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+
+  cursor: pointer;
+
+  transition:
+    background 200ms var(--ease-tag),
+    border-color 200ms var(--ease-tag),
+    color 200ms var(--ease-tag),
+    box-shadow 200ms var(--ease-tag);
+}
+
+.admin-select-custom:hover {
+  background: #171717;
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+.admin-select-custom:focus {
+  outline: none;
+  background: #151515;
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.05);
+}
+
+.admin-select-custom option {
+  background: #111111;
+  color: #f5f0e8;
+}

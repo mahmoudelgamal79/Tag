@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Frequently asked questions about TAG." />
+  <title>FAQ — TAG</title>
+  <meta property="og:title" content="FAQ — TAG" />
+  <meta property="og:description" content="Frequently asked questions about TAG." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=block" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css?v=7" />
+  <link rel="stylesheet" href="css/rtl.css?v=6" />
+  <link rel="stylesheet" href="css/help.css?v=5" />
+  <script src="js/translate.js?v=5" defer></script>
+</head>
+
+<body class="help-page">
+
+  <div class="loader" id="loader">
+    <div class="loader-mark">
+    <img src="assets/images/logo-white.png" alt="TAG Logo">
+</div>
+    <div class="loader-line"><span></span></div>
+  </div>
+
+  <!-- ============================================
+         CUSTOM CURSOR
+         ============================================ -->
+  <div class="cursor-ring" id="cursorRing">
+    <div class="cursor-ring-inner"></div>
+  </div>
+  <div class="cursor-dot" id="cursorDot">
+    <div class="cursor-dot-inner"></div>
+  </div>
+
+
+  <!-- ============================================
+         NAVBAR
+         ============================================ -->
+  <header class="navbar" id="navbar">
+    <nav class="wrap navbar-inner">
+      <!-- Logo -->
+      <a href="index.html" class="navbar-logo">
+        <img src="assets/images/tag-hero-mark.png" alt="TAG" class="navbar-logo-img" />
+      </a>
+
+      <!-- Mobile menu button -->
+      <button class="navbar-mobile-btn" id="mobileMenuBtn" aria-label="Open menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="4" y1="8" x2="20" y2="8" />
+          <line x1="4" y1="16" x2="20" y2="16" />
+        </svg>
+      </button>
+
+      <!-- Center nav links -->
+      <ul class="navbar-links">
+        <li><a href="shop.html" class="nav-link">Shop</a></li>
+        <li><a href="index.html#collection" class="nav-link">New In</a></li>
+        <li><a href="index.html#lookbook" class="nav-link">Lookbook</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+
+      <!-- Right actions -->
+      <div class="navbar-actions">
+
+        <!-- Expanding search (desktop) -->
+        <div class="navbar-search-outer" id="searchArea">
+          <div class="navbar-search-inner" id="searchInner">
+            <button class="navbar-search-btn" id="searchToggleBtn" aria-label="Search">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+            </button>
+            <input type="text" class="navbar-search-input" id="searchInput" placeholder="Search the collection…" />
+          </div>
+        </div>
+
+        <!-- Language toggle (EN / AR) -->
+        <button class="navbar-lang-btn" type="button" data-lang-toggle aria-label="Switch language">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+          <span data-lang-label>AR</span>
+        </button>
+
+        <!-- Likes -->
+        <a href="likes.html" class="navbar-icon-btn" aria-label="Wishlist">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+          </svg>
+          <span class="navbar-badge" id="likesBadge" style="display:none;">0</span>
+        </a>
+
+        <!-- Cart -->
+        <button class="navbar-icon-btn" id="cartToggleBtn" aria-label="Cart">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <path d="M16 10a4 4 0 0 1-8 0" />
+          </svg>
+          <span class="navbar-badge" id="cartBadge" style="display:none;">0</span>
+        </button>
+
+        <!-- Profile -->
+        <button class="navbar-icon-btn" id="navProfileBtn" aria-label="Profile">
+          <span id="navProfileAvatar"></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-overlay" id="mobileOverlay">
+    <div class="mobile-backdrop" id="mobileBackdrop"></div>
+    <div class="mobile-drawer">
+      <div class="mobile-drawer-header">
+        <span class="mobile-drawer-logo">Tag</span>
+        <button id="mobileCloseBtn" aria-label="Close menu" class="mobile-drawer-close">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+      </div>
+      <ul class="mobile-nav">
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="index.html#collection">New In</a></li>
+        <li><a href="index.html#lookbook">Lookbook</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><button class="mobile-lang-btn" type="button" data-lang-toggle aria-label="Switch language"><span data-lang-label>AR</span></button></li>
+      </ul>
+      <div class="mobile-search">
+        <div class="mobile-search-inner">
+          <svg class="mobile-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+          <input type="text" placeholder="Search…" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <main><section class="help-hero"><div class="wrap"><span class="help-kicker">Help Centre / Answers</span><h1 class="help-title">FREQUENTLY<br>ASKED.</h1><p class="help-intro">Quick answers to the questions we hear most. If you cannot find what you need, TAG is only a message away.</p></div></section><section class="wrap help-content"><div class="help-grid"><aside class="help-side">FAQ</aside><div class="help-main"><h2 class="help-heading">THE ESSENTIALS.</h2><div class="faq-list"><details class="faq-item"><summary>How do I find the right size?</summary><p>Start with our Size Guide, which lists garment measurements in centimetres. If you are between sizes, choose the larger size for a more relaxed streetwear fit.</p></details><details class="faq-item"><summary>Which payment methods can I use?</summary><p>TAG accepts Cash on Delivery, Visa, and Vodafone Cash. Cash on Delivery includes a 20 EGP service fee, shown clearly in checkout.</p></details><details class="faq-item"><summary>How long does delivery take?</summary><p>Most orders arrive in 3–5 business days. Timing can vary according to your governorate and carrier conditions.</p></details><details class="faq-item"><summary>Can I change an order after placing it?</summary><p>Contact us as soon as possible with your order number. We will do our best to help before your order has been dispatched.</p></details><details class="faq-item"><summary>How can I track my order?</summary><p>Use the Track Order page with your order reference, or contact TAG on WhatsApp for help with a delivery update.</p></details><details class="faq-item"><summary>How do I start a return or exchange?</summary><p>Visit the Returns page and contact our team with your order number. We will review your request and provide the next steps.</p></details></div></div></div></section><section class="wrap help-cta"><h2>STILL NEED AN ANSWER?</h2><a href="contact.html" class="btn">Contact TAG →</a></section></main>
+
+  <!-- ============================================
+         FOOTER
+         ============================================ -->
+  <footer id="footer" class="footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <!-- Brand -->
+        <div class="footer-brand">
+          <h3 class="footer-brand-name">TAG</h3>
+          <p class="footer-brand-tagline">— Men's Streetwear —</p>
+          <p class="footer-brand-desc">Premium streetwear essentials. Built heavy. Built to last. Own the street.</p>
+          <div class="footer-contact" aria-label="Contact TAG">
+            <a class="footer-whatsapp-button" href="https://wa.me/201507674065" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M20.52 3.48A11.85 11.85 0 0 0 12.07 0C5.55 0 .24 5.3.24 11.83c0 2.08.54 4.11 1.57 5.9L.14 23.8l6.21-1.63a11.8 11.8 0 0 0 5.7 1.45h.01c6.52 0 11.83-5.3 11.83-11.83 0-3.16-1.23-6.13-3.37-8.31ZM12.07 21.62a9.78 9.78 0 0 1-4.99-1.37l-.36-.21-3.69.97.99-3.6-.23-.37a9.79 9.79 0 0 1-1.5-5.21c0-5.41 4.4-9.81 9.8-9.81 2.62 0 5.08 1.02 6.93 2.88a9.73 9.73 0 0 1 2.86 6.93c0 5.4-4.4 9.79-9.81 9.79Zm5.38-7.34c-.29-.15-1.72-.85-1.98-.94-.27-.1-.46-.15-.65.15-.2.29-.75.94-.92 1.13-.17.2-.34.22-.63.07-1.72-.86-2.85-1.54-3.98-3.49-.3-.52.3-.49.85-1.63.1-.2.05-.37-.02-.52-.08-.15-.65-1.57-.9-2.15-.23-.56-.47-.48-.65-.49h-.55c-.19 0-.5.07-.76.37-.26.3-1 1-1 2.44s1.03 2.84 1.18 3.04c.15.2 2.02 3.08 4.89 4.32 1.81.78 2.51.85 3.4.72.54-.08 1.72-.7 1.97-1.37.24-.67.24-1.25.17-1.37-.07-.13-.26-.2-.55-.35Z"/></svg>WhatsApp</a>
+          </div>
+          <div class="footer-socials">
+            <a href="https://www.instagram.com/tag_clothing.eg/" class="footer-social-link" aria-label="Instagram">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+              </svg>
+            </a>
+            <a href="https://www.facebook.com/tag.clothing.e" class="footer-social-link" aria-label="Facebook">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+              </svg>
+            </a>
+            <a href="https://www.tiktok.com/@tag_clothing.eg?is_from_webapp=1&sender_device=pc" class="footer-social-link" aria-label="TikTok">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M9 12a4 4 0 1 0 4 4V4c1.5 2 3 3 5 3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Shop Links -->
+        <div>
+          <h4 class="footer-col-title">Shop</h4>
+          <ul class="footer-links">
+            <li><a href="index.html#collection">New In</a></li>
+            <li><a href="index.html#best-sellers">Best Sellers</a></li>
+            <li><a href="shop.html?category=Hoodies">Hoodies</a></li>
+            <li><a href="shop.html?category=Pants">Cargo Pants</a></li>
+            <li><a href="shop.html">All Products</a></li>
+          </ul>
+        </div>
+
+        <!-- Help Links -->
+        <div>
+          <h4 class="footer-col-title">Help</h4>
+          <ul class="footer-links">
+            <li><a href="shipping.html">Shipping</a></li>
+            <li><a href="returns.html">Returns</a></li>
+            <li><a href="size-guide.html">Size Guide</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="track-order.html">Track Order</a></li>
+          </ul>
+        </div>
+
+        <!-- Company Links -->
+        <div>
+          <h4 class="footer-col-title">Company</h4>
+          <ul class="footer-links">
+            <li><a href="brand-story.html">Brand Story</a></li>
+            <li><a href="sustainability.html">Sustainability</a></li>
+            <li><a href="careers.html">Careers</a></li>
+            <li><a href="stockists.html">Stockists</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2026 TAG — Men's Streetwear. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-of-service.html">Terms of Service</a>
+          <a href="cookie-settings.html">Cookie Settings</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ============================================
+         CART SIDEBAR
+         ============================================ -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-sidebar" id="cartSidebar">
+    <div class="cart-sidebar-header">
+      <div class="cart-sidebar-title-wrap">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round" style="color:var(--tag-white)">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <path d="M16 10a4 4 0 0 1-8 0" />
+        </svg>
+        <h3 class="cart-sidebar-title">YOUR BAG</h3>
+        <span class="cart-sidebar-count" id="cartSidebarCount">(0)</span>
+      </div>
+      <button id="cartCloseBtn" aria-label="Close cart" class="cart-sidebar-close">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+    </div>
+    <div class="cart-sidebar-body" id="cartSidebarBody">
+      <!-- Rendered by JS -->
+    </div>
+    <div class="cart-sidebar-footer" id="cartSidebarFooter" style="display:none;">
+      <div class="cart-subtotal-row">
+        <span class="cart-subtotal-label">Subtotal</span>
+        <span class="cart-subtotal-value" id="cartSubtotal">0 EGP</span>
+      </div>
+      <p class="cart-shipping-note">Shipping and taxes calculated at checkout.</p>
+      <a href="checkout.html" class="btn-white cart-checkout-btn" style="display:block;text-align:center;">Checkout</a>
+    </div>
+  </aside>
+
+  <script src="js/products-data.js?v=5"></script>
+  <script src="js/script.js?v=5"></script>
+  <script src="js/cursor.js?v=8"></script>
+
+</body>
+
+</html>

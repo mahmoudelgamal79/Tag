@@ -1,0 +1,846 @@
+/* ============================================
+   TAG ADMIN — Products Page
+   Built entirely on top of the design tokens and
+   components already defined in ../../css/style.css
+   and dashboard.css (colors, fonts, easing, radii,
+   panels, stat cards, badges, table, buttons).
+   This file only adds the components Phase 1 did
+   not need: toolbar, filters, bulk bar, product
+   table specifics, grid view, pagination, skeleton
+   and empty states.
+   ============================================ */
+
+/* ---------------------------------- Page header button ---------------------------------- */
+.admin-add-product-btn {
+  flex-shrink: 0;
+}
+
+.admin-add-product-btn svg {
+  flex-shrink: 0;
+}
+
+/* ============================================
+   TOOLBAR
+   ============================================ */
+.admin-toolbar-panel {
+  padding: 1.1rem 1.5rem;
+}
+
+.admin-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.admin-filter-search {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex: 1 1 220px;
+  min-width: 200px;
+  padding: 0.65rem 0.95rem;
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--admin-text-faint);
+  transition: all 300ms var(--ease-tag);
+}
+
+.admin-filter-search:focus-within {
+  border-color: var(--admin-border-strong);
+  background: var(--admin-panel-raised);
+  color: var(--admin-text);
+}
+
+.admin-filter-search svg {
+  flex-shrink: 0;
+}
+
+.admin-filter-search input {
+  width: 100%;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--admin-text);
+}
+
+.admin-filter-search input::placeholder {
+  color: var(--admin-text-faint);
+}
+
+/* .admin-select definitions moved to shared dashboard.css */
+
+.admin-select--compact {
+  padding: 0.35rem 1.7rem 0.35rem 0.6rem;
+  font-size: 12px;
+  margin: 0 0.35rem;
+}
+
+
+
+.admin-view-toggle {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius);
+  padding: 0.2rem;
+  gap: 0.15rem;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.admin-view-toggle-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: calc(var(--admin-radius) - 1px);
+  color: var(--admin-text-faint);
+  transition: all 250ms var(--ease-tag);
+}
+
+.admin-view-toggle-btn:hover {
+  color: var(--admin-text);
+}
+
+.admin-view-toggle-btn.active {
+  background: var(--admin-text);
+  color: var(--tag-black);
+}
+
+/* Small hover tooltips reused visually from the sidebar nav tooltip pattern */
+.admin-view-toggle-btn[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: var(--admin-panel-raised);
+  border: 1px solid var(--admin-border-strong);
+  color: var(--admin-text);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  padding: 0.3rem 0.55rem;
+  white-space: nowrap;
+  border-radius: var(--admin-radius);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms var(--ease-tag), transform 200ms var(--ease-tag);
+  z-index: 20;
+}
+
+.admin-view-toggle-btn[data-tooltip]:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ============================================
+   BULK ACTIONS BAR
+   ============================================ */
+.admin-bulk-bar {
+  overflow: hidden;
+  animation: slideDown 350ms var(--ease-tag) both;
+}
+
+.admin-bulk-bar-inner {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  background: var(--admin-panel-raised);
+  border: 1px solid var(--admin-border-strong);
+  border-radius: var(--admin-radius);
+  padding: 0.85rem 1.1rem;
+}
+
+.admin-bulk-count {
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--admin-text);
+  flex-shrink: 0;
+}
+
+.admin-bulk-count #bulkCount {
+  font-family: var(--font-mono);
+}
+
+.admin-bulk-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.admin-bulk-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--admin-text-dim);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius-pill);
+  padding: 0.45rem 0.85rem;
+  transition: all 250ms var(--ease-tag);
+}
+
+.admin-bulk-btn:hover {
+  color: var(--admin-text);
+  border-color: var(--admin-border-strong);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.admin-bulk-btn--danger:hover {
+  color: var(--admin-danger);
+  border-color: var(--admin-danger);
+  background: var(--admin-danger-bg);
+}
+
+.admin-bulk-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  color: var(--admin-text-faint);
+  border-radius: 50%;
+  transition: all 250ms var(--ease-tag);
+}
+
+.admin-bulk-close:hover {
+  color: var(--admin-text);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* ============================================
+   PRODUCTS PANEL / RESULT COUNT
+   ============================================ */
+.admin-products-result-count {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--admin-text-faint);
+  flex-shrink: 0;
+}
+
+/* ============================================
+   CHECKBOX (shared across table + grid)
+   ============================================ */
+.admin-checkbox {
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+}
+
+.admin-checkbox input {
+  position: absolute;
+  opacity: 0;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.admin-checkbox-box {
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--admin-border-strong);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 200ms var(--ease-tag);
+}
+
+.admin-checkbox-box::after {
+  content: '';
+  width: 8px;
+  height: 5px;
+  border-left: 2px solid var(--tag-black);
+  border-bottom: 2px solid var(--tag-black);
+  transform: rotate(-45deg) translateY(-1px);
+  opacity: 0;
+  transition: opacity 150ms var(--ease-tag);
+}
+
+.admin-checkbox input:checked+.admin-checkbox-box {
+  background: var(--admin-text);
+  border-color: var(--admin-text);
+}
+
+.admin-checkbox input:checked+.admin-checkbox-box::after {
+  opacity: 1;
+}
+
+.admin-checkbox input:indeterminate+.admin-checkbox-box {
+  background: var(--admin-text);
+  border-color: var(--admin-text);
+}
+
+.admin-checkbox input:focus-visible+.admin-checkbox-box {
+  outline: 2px solid var(--admin-border-strong);
+  outline-offset: 2px;
+}
+
+.admin-table-checkbox-col {
+  width: 40px;
+}
+
+/* ============================================
+   PRODUCTS TABLE — specifics
+   ============================================ */
+.admin-products-table {
+  min-width: 880px;
+}
+
+.admin-product-row.is-selected {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.admin-product-thumb {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--admin-radius);
+  overflow: hidden;
+  border: 1px solid var(--admin-border);
+  flex-shrink: 0;
+  background: var(--admin-panel-raised);
+}
+
+.admin-product-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.admin-product-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--admin-text);
+}
+
+.admin-product-info {
+  min-width: 0;
+}
+
+.admin-product-name {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--admin-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 220px;
+}
+
+.admin-product-sku {
+  margin-top: 0.15rem;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--admin-text-faint);
+}
+
+.admin-table-stock {
+  font-family: var(--font-mono);
+  color: var(--admin-text);
+}
+
+.admin-table-stock.is-zero {
+  color: var(--admin-danger);
+}
+
+.admin-badge.status-active {
+  color: var(--admin-success);
+  background: var(--admin-success-bg);
+}
+
+.admin-badge.status-draft {
+  color: var(--admin-warning);
+  background: var(--admin-warning-bg);
+}
+
+.admin-badge.status-out-of-stock {
+  color: var(--admin-danger);
+  background: var(--admin-danger-bg);
+}
+
+.admin-badge.status-hidden {
+  color: var(--admin-text-faint);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.admin-table-actions-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.admin-table-action-btn {
+  position: relative;
+}
+
+.admin-table-action-btn[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: var(--admin-panel-raised);
+  border: 1px solid var(--admin-border-strong);
+  color: var(--admin-text);
+  font-family: var(--font-sans);
+  font-size: 10.5px;
+  padding: 0.3rem 0.55rem;
+  white-space: nowrap;
+  border-radius: var(--admin-radius);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms var(--ease-tag), transform 200ms var(--ease-tag);
+  z-index: 20;
+}
+
+.admin-table-action-btn[data-tooltip]:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.admin-table-action-btn.danger:hover {
+  color: var(--admin-danger);
+  border-color: var(--admin-danger);
+  background: var(--admin-danger-bg);
+}
+
+.admin-products-table tbody tr {
+  opacity: 0;
+  animation: fadeUp 450ms var(--ease-tag) forwards;
+}
+
+/* ============================================
+   GRID VIEW
+   ============================================ */
+.admin-products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.1rem;
+}
+
+.admin-product-card {
+  position: relative;
+  background: var(--admin-panel);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(14px);
+  animation: fadeUp 500ms var(--ease-tag) forwards;
+  transition: border-color 300ms var(--ease-tag), transform 300ms var(--ease-tag), box-shadow 300ms var(--ease-tag);
+}
+
+.admin-product-card:hover {
+  border-color: var(--admin-border-strong);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -22px rgba(0, 0, 0, 0.6);
+}
+
+.admin-product-card-check {
+  position: absolute;
+  top: 0.65rem;
+  left: 0.65rem;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 4px;
+  padding: 3px;
+  backdrop-filter: blur(3px);
+}
+
+.admin-product-card-image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: var(--admin-panel-raised);
+  overflow: hidden;
+}
+
+.admin-product-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 500ms var(--ease-tag);
+}
+
+.admin-product-card:hover .admin-product-card-image img {
+  transform: scale(1.05);
+}
+
+.admin-product-card-body {
+  padding: 0.9rem 1rem 1rem;
+}
+
+.admin-product-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.admin-product-card-name {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--admin-text);
+  line-height: 1.3;
+}
+
+.admin-product-card-sku {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--admin-text-faint);
+  margin-top: 0.2rem;
+}
+
+.admin-product-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.75rem;
+}
+
+.admin-product-card-price {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--admin-text);
+}
+
+.admin-product-card-stock {
+  font-size: 10.5px;
+  color: var(--admin-text-faint);
+}
+
+.admin-product-card-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.85rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--admin-border);
+}
+
+.admin-product-card-actions {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.admin-product-card-actions .admin-table-action-btn {
+  width: 26px;
+  height: 26px;
+}
+
+.admin-product-card-actions .admin-table-action-btn svg {
+  width: 12px;
+  height: 12px;
+}
+
+/* ============================================
+   SKELETON LOADING STATE
+   ============================================ */
+.admin-skeleton-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.admin-skeleton-row {
+  height: 54px;
+  border-radius: var(--admin-radius);
+  background: linear-gradient(90deg,
+      var(--admin-panel-raised) 0%,
+      rgba(255, 255, 255, 0.07) 50%,
+      var(--admin-panel-raised) 100%);
+  background-size: 200% 100%;
+  animation: adminShimmer 1.6s ease-in-out infinite;
+}
+
+@keyframes adminShimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ============================================
+   EMPTY STATE
+   ============================================ */
+.admin-empty-state:not([hidden]) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 1.5rem;
+  animation: fadeIn 500ms var(--ease-tag) both;
+}
+
+.admin-empty-illustration {
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed var(--admin-border-strong);
+  border-radius: 50%;
+  color: var(--admin-text-faint);
+  margin-bottom: 1.5rem;
+}
+
+.admin-empty-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  letter-spacing: 0.01em;
+  color: var(--admin-text);
+}
+
+.admin-empty-sub {
+  margin-top: 0.4rem;
+  margin-bottom: 1.5rem;
+  font-size: 13px;
+  color: var(--admin-text-dim);
+  font-weight: 300;
+}
+
+/* ============================================
+   PAGINATION
+   ============================================ */
+.admin-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--admin-border);
+}
+
+.admin-rows-per-page {
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+  color: var(--admin-text-faint);
+  white-space: nowrap;
+}
+
+.admin-pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.admin-page-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  height: 30px;
+  padding: 0 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--admin-text-dim);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius);
+  transition: all 250ms var(--ease-tag);
+}
+
+.admin-page-btn:hover:not(:disabled) {
+  color: var(--admin-text);
+  border-color: var(--admin-border-strong);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.admin-page-btn.active {
+  background: var(--admin-text);
+  color: var(--tag-black);
+  border-color: var(--admin-text);
+}
+
+.admin-page-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.admin-page-ellipsis {
+  color: var(--admin-text-faint);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  padding: 0 0.25rem;
+}
+
+/* ============================================
+   TOAST (lightweight UI feedback — no backend)
+   ============================================ */
+.admin-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--admin-panel-raised);
+  border: 1px solid var(--admin-border-strong);
+  color: var(--admin-text);
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--admin-radius-pill);
+  box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 300ms var(--ease-tag), transform 300ms var(--ease-tag);
+  z-index: 200;
+  white-space: nowrap;
+}
+
+.admin-toast.is-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1200px) {
+  .admin-view-toggle {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .admin-select-wrap {
+    flex: 1 1 140px;
+  }
+
+  .admin-select {
+    width: 100%;
+  }
+}
+
+/* Convert the products table into stacked cards below 720px */
+@media (max-width: 720px) {
+  .admin-products-table-wrap {
+    overflow: visible;
+  }
+
+  .admin-products-table {
+    min-width: 0;
+  }
+
+  .admin-products-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .admin-products-table,
+  .admin-products-table tbody,
+  .admin-products-table tr,
+  .admin-products-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .admin-products-table tr {
+    position: relative;
+    background: var(--admin-panel-raised);
+    border: 1px solid var(--admin-border);
+    border-radius: var(--admin-radius);
+    padding: 2.6rem 0.9rem 0.9rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .admin-products-table td {
+    border-bottom: none;
+    padding: 0.35rem 0;
+    white-space: normal;
+  }
+
+  .admin-products-table td[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 9.5px;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    color: var(--admin-text-faint);
+    margin-bottom: 0.2rem;
+  }
+
+  .admin-products-table td.admin-table-checkbox-col {
+    position: absolute;
+    top: 0.85rem;
+    left: 0.9rem;
+    width: auto;
+    padding: 0;
+  }
+
+  .admin-products-table td.admin-table-checkbox-col::before {
+    display: none;
+  }
+
+  .admin-products-table td:nth-child(2) {
+    position: absolute;
+    top: 0.7rem;
+    right: 0.9rem;
+    width: auto;
+  }
+
+  .admin-products-table td:nth-child(2)::before {
+    display: none;
+  }
+
+  .admin-table-actions-cell {
+    margin-top: 0.4rem;
+  }
+
+  .admin-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .admin-view-toggle {
+    align-self: flex-end;
+    margin-left: 0;
+  }
+
+  .admin-pagination {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 0.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .admin-bulk-bar,
+  .admin-products-table tbody tr,
+  .admin-product-card,
+  .admin-empty-state,
+  .admin-skeleton-row {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

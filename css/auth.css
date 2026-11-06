@@ -1,0 +1,384 @@
+/* ============================================
+   TAG — Auth Pages Styles
+   ============================================ */
+
+/* --- Page Layout --- */
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--tag-black);
+}
+
+/* --- Simplified Nav --- */
+.auth-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.auth-logo img {
+  height: 32px;
+  width: auto;
+  display: block;
+}
+
+.auth-nav-back {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 500;
+  color: var(--tag-200);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0.55rem 1.25rem;
+  border-radius: 3px;
+  transition: all 300ms;
+  text-decoration: none;
+}
+
+.auth-nav-back:hover {
+  color: var(--tag-white);
+  border-color: var(--tag-white);
+}
+
+/* --- Centered Container --- */
+.auth-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1.25rem;
+}
+
+/* --- Card --- */
+.auth-card {
+  max-width: 420px;
+  width: 100%;
+  background: var(--tag-950);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  padding: 2.5rem;
+}
+
+.auth-card.narrow {
+  max-width: 400px;
+}
+
+/* --- Title --- */
+.auth-title {
+  font-family: var(--font-display);
+  font-size: 2.25rem;
+  letter-spacing: 0.04em;
+  color: var(--tag-white);
+  text-align: center;
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+
+/* --- Subtitle --- */
+.auth-subtitle {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--tag-200);
+  text-align: center;
+  font-weight: 300;
+  margin-bottom: 2rem;
+}
+
+/* --- Form Fields --- */
+.auth-field {
+  margin-bottom: 1.25rem;
+}
+
+.auth-label {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--tag-200);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.auth-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  padding: 0.85rem 1rem;
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  transition: border-color 300ms;
+}
+
+.auth-input::placeholder {
+  color: var(--tag-400);
+}
+
+.auth-input:focus {
+  border-color: rgba(255, 255, 255, 0.25);
+  outline: none;
+}
+
+/* --- Password Toggle --- */
+.auth-input-wrapper {
+  position: relative;
+}
+
+.auth-input-wrapper .auth-input {
+  padding-right: 3rem;
+}
+
+.auth-password-toggle {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--tag-300);
+  background: none;
+  border: none;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 300ms;
+  cursor: pointer;
+}
+
+.auth-password-toggle:hover {
+  color: var(--tag-white);
+}
+
+/* --- Field Row (2-col) --- */
+.auth-field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* --- Checkbox --- */
+.auth-checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.auth-checkbox {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 2px;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  transition: all 200ms;
+}
+
+.auth-checkbox:checked {
+  background: var(--tag-white);
+  border-color: var(--tag-white);
+}
+
+.auth-checkbox:checked::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  width: 4px;
+  height: 8px;
+  border: solid var(--tag-black);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.auth-checkbox:focus-visible {
+ outline: 1px solid var(--tag-white);
+  outline-offset: 2px;
+}
+
+.auth-checkbox-label {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--tag-200);
+  cursor: pointer;
+  user-select: none;
+}
+
+/* --- Error States --- */
+.auth-error {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: #e6707a;
+  margin-top: 0.35rem;
+  display: none;
+}
+
+.auth-field-error .auth-error {
+  display: block;
+}
+
+.auth-field-error .auth-input {
+  border-color: #e6707a;
+}
+
+/* --- Divider --- */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--tag-500);
+}
+
+.auth-divider span {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--tag-400);
+}
+
+/* --- Links --- */
+.auth-link {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--tag-200);
+  transition: color 300ms;
+  text-decoration: none;
+}
+
+.auth-link:hover {
+  color: var(--tag-white);
+}
+
+.auth-link-center {
+  text-align: center;
+  display: block;
+  margin-top: 1.25rem;
+}
+
+.auth-link-underline {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* --- Full Width Button Overrides --- */
+.auth-card .btn-white,
+.auth-card .btn-outline {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+/* --- Forgot Password Success State --- */
+.auth-success {
+  text-align: center;
+  display: none;
+}
+
+.auth-success.is-visible {
+  display: block;
+}
+
+.auth-success-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 1.5rem;
+  border: 2px solid #6fcf97;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-success-icon svg {
+  color: #6fcf97;
+}
+
+.auth-success-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  letter-spacing: 0.04em;
+  color: var(--tag-white);
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+
+.auth-success-text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--tag-200);
+  font-weight: 300;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+/* --- Lock Icon (Forgot Password) --- */
+.auth-icon-lock {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.auth-icon-lock svg {
+  color: var(--tag-300);
+}
+
+/* --- Footer --- */
+.auth-footer {
+  text-align: center;
+  padding: 2rem 1.25rem;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: var(--tag-400);
+  letter-spacing: 0.05em;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 1.5rem;
+  }
+
+  .auth-field-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .auth-title {
+    font-size: 2rem;
+  }
+}
+
+/* --- Reduced Motion --- */
+@media (prefers-reduced-motion: reduce) {
+  .auth-input,
+  .auth-password-toggle,
+  .auth-nav-back,
+  .auth-link,
+  .auth-checkbox,
+  .auth-card .btn-white,
+  .auth-card .btn-outline {
+    transition: none;
+  }
+}

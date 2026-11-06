@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Messages — TAG Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=block" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css?v=7" />
+  <link rel="stylesheet" href="css/dashboard.css?v=5" />
+  <link rel="stylesheet" href="css/messages.css?v=1" />
+</head>
+<body class="admin-body">
+  <div class="loader" id="loader"><div class="loader-mark"><img src="../assets/images/logo-white.png" alt="TAG Logo"></div><div class="loader-line"><span></span></div></div>
+  <div class="admin-sidebar-overlay" id="adminSidebarOverlay"></div>
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="admin-sidebar-head"><a href="index.html" class="admin-sidebar-logo"><img src="../assets/images/tag-hero-mark.png" alt="TAG" /><span class="admin-sidebar-logo-text">TAG Admin</span></a><button class="admin-sidebar-collapse-btn" id="sidebarCollapseBtn" aria-label="Collapse sidebar">‹</button></div>
+    <nav class="admin-nav" aria-label="Dashboard navigation">
+      <p class="admin-nav-section-label">General</p>
+      <a href="index.html" class="admin-nav-item"><span class="admin-nav-label">Dashboard</span><span class="admin-nav-tooltip">Dashboard</span></a>
+      <a href="products.html" class="admin-nav-item"><span class="admin-nav-label">Products</span><span class="admin-nav-tooltip">Products</span></a>
+      <p class="admin-nav-section-label">Sales</p>
+      <a href="orders.html" class="admin-nav-item"><span class="admin-nav-label">Orders</span><span class="admin-nav-tooltip">Orders</span></a>
+      <a href="customers.html" class="admin-nav-item"><span class="admin-nav-label">Customers</span><span class="admin-nav-tooltip">Customers</span></a>
+      <a href="analytics.html" class="admin-nav-item"><span class="admin-nav-label">Analytics</span><span class="admin-nav-tooltip">Analytics</span></a>
+      <div class="admin-nav-divider"></div>
+      <a href="messages.html" class="admin-nav-item active" aria-current="page"><span class="admin-nav-label">Messages</span><span class="admin-nav-badge" id="messagesNavBadge" hidden></span><span class="admin-nav-tooltip">Messages</span></a>
+      <a href="settings.html" class="admin-nav-item"><span class="admin-nav-label">Settings</span><span class="admin-nav-tooltip">Settings</span></a>
+    </nav>
+    <div class="admin-sidebar-foot"><a href="admin-account.html" class="admin-sidebar-user"><div class="admin-sidebar-user-avatar">A</div><div class="admin-sidebar-user-info"><p class="admin-sidebar-user-name">Admin</p><p class="admin-sidebar-user-email">admin@tag.com</p></div></a><a href="../index.html" class="admin-sidebar-foot-link"><span class="admin-sidebar-foot-text">Logout</span></a></div>
+  </aside>
+  <div class="admin-main">
+    <header class="admin-topbar" id="adminTopbar"><div class="admin-topbar-left"><button class="admin-mobile-menu-btn admin-icon-btn" id="adminMobileMenuBtn" aria-label="Open menu">☰</button><h1 class="admin-page-title">Messages</h1></div><div class="admin-topbar-right"><button class="admin-icon-btn" aria-label="Notifications">🔔<span class="admin-notif-badge"></span></button><div class="admin-profile"><div class="admin-avatar">A</div><div class="admin-profile-info"><span class="admin-profile-name">Admin</span><span class="admin-profile-role">Store Owner</span></div></div></div></header>
+    <main class="admin-content">
+      <section class="admin-welcome"><div><p class="admin-welcome-eyebrow">Support</p><h2 class="admin-welcome-title">Messages</h2><p class="admin-welcome-sub">Review and manage messages sent through the contact form.</p></div><div class="messages-unread-summary"><strong id="unreadCount">0</strong><span>new messages</span></div></section>
+      <section class="admin-panel messages-panel">
+        <div class="messages-toolbar"><label class="admin-search messages-search"><input id="messagesSearch" type="search" placeholder="Search messages" autocomplete="off" /></label><select id="messagesStatus" class="messages-select" aria-label="Filter messages"><option value="all">All messages</option><option value="unread">Unread</option><option value="read">Read</option></select></div>
+        <div id="messagesLoading" class="messages-loading">Loading messages…</div>
+        <div id="messagesEmpty" class="admin-empty-state" hidden><div class="admin-empty-illustration">✉</div><h3 class="admin-empty-title">No messages found</h3><p class="admin-empty-sub">Messages submitted through the contact form will appear here.</p></div>
+        <div id="messagesList" class="messages-list" aria-live="polite"></div>
+        <div id="messagesPagination" class="admin-pagination"></div>
+      </section>
+    </main>
+  </div>
+  <div class="admin-toast" id="adminToast"></div>
+  <script src="../js/api.js?v=6"></script>
+  <script src="js/dashboard.js?v=6"></script>
+  <script src="js/messages.js?v=1"></script>
+  <script src="js/notifications.js?v=6" defer></script>
+</body>
+</html>
