@@ -4,7 +4,7 @@ E-commerce website for a clothing brand, built for a real client. I was the main
 
 ## Features
 
-- Storefront: shop, collections, product pages, likes, cart and checkout with order confirmation
+- Storefront: shop, product pages, likes, checkout and order confirmation
 - Customer accounts: registration, login, password reset and account page
 - Brand and support pages: brand story, FAQ, shipping, returns, size guide, stockists, careers, sustainability, contact, privacy policy and cookie settings
 - Admin dashboard (`dashboard/`): products, orders, customers, messages, analytics and settings
